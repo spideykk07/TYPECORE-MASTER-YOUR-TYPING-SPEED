@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="neon">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TypeCore — Master Your Typing Speed</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Mono:wght@400;500&family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+
+/* ══════════════════════════════════════
+   THEMES
+══════════════════════════════════════ */
+:root,[data-theme="neon"]{
+  --tc-bg:#080810;--tc-bg2:#0d0d1a;--tc-surface:#0f0f1e;--tc-surface2:#161628;
+  --tc-border:#1e1e3a;--tc-border2:#2a2a50;
+  --tc-accent:#00ffaa;--tc-accent2:#ff0066;--tc-accent3:#7700ff;--tc-accent4:#00aaff;
+  --tc-text:#e0e0ff;--tc-dim:#3a3a6a;--tc-dimmer:#252545;
+  --tc-correct:#00ffaa;--tc-incorrect:#ff0066;--tc-cursor:#ffcc00;
+  --tc-glow:0 0 20px #00ffaa66,0 0 40px #00ffaa33;
+  --tc-glow2:0 0 20px #ff006666;
+}
+[data-theme="cyberpunk"]{
+  --tc-bg:#0a0005;--tc-bg2:#100008;--tc-surface:#120008;--tc-surface2:#1a0010;
+  --tc-border:#2a0020;--tc-border2:#3a0030;
+  --tc-accent:#ff00aa;--tc-accent2:#ffcc00;--tc-accent3:#00ffff;--tc-accent4:#ff6600;
+  --tc-text:#ffe0f0;--tc-dim:#3a1030;--tc-dimmer:#200018;
+  --tc-correct:#00ffff;--tc-incorrect:#ff00aa;--tc-cursor:#ffcc00;
+  --tc-glow:0 0 20px #ff00aa66,0 0 40px #ff00aa33;
+  --tc-glow2:0 0 20px #ffcc0066;
+}
+[data-theme="ocean"]{
+  --tc-bg:#010810;--tc-bg2:#020d1a;--tc-surface:#030f1e;--tc-surface2:#041528;
+  --tc-border:#062040;--tc-border2:#0a3060;
+  --tc-accent:#00d4ff;--tc-accent2:#ff6b35;--tc-accent3:#7b2fff;--tc-accent4:#00ff88;
+  --tc-text:#b8e8ff;--tc-dim:#0a2040;--tc-dimmer:#051020;
+  --tc-correct:#00d4ff;--tc-incorrect:#ff6b35;--tc-cursor:#ffd700;
+  --tc-glow:0 0 20px #00d4ff66,0 0 40px #00d4ff33;
+  --tc-glow2:0 0 20px #ff6b3566;
+}
+[data-theme="synthwave"]{
+  --tc-bg:#0a0015;--tc-bg2:#0f0020;--tc-surface:#130025;--tc-surface2:#1a0030;
+  --tc-border:#2a0050;--tc-border2:#3a0070;
+  --tc-accent:#ff79c6;--tc-accent2:#bd93f9;--tc-accent3:#50fa7b;--tc-accent4:#ffb86c;
+  --tc-text:#f8d8f8;--tc-dim:#3a1050;--tc-dimmer:#200030;
+  --tc-correct:#50fa7b;--tc-incorrect:#ff5555;--tc-cursor:#ffb86c;
+  --tc-glow:0 0 20px #ff79c666,0 0 40px #ff79c633;
+  --tc-glow2:0 0 20px #bd93f966;
+}
+[data-theme="matrix"]{
+  --tc-bg:#000500;--tc-bg2:#000800;--tc-surface:#000a00;--tc-surface2:#001200;
+  --tc-border:#001a00;--tc-border2:#002500;
+  --tc-accent:#00ff41;--tc-accent2:#00cc33;--tc-accent3:#008822;--tc-accent4:#00ff88;
+  --tc-text:#ccffcc;--tc-dim:#003300;--tc-dimmer:#001500;
+  --tc-correct:#00ff41;--tc-incorrect:#ff3333;--tc-cursor:#00ff41;
+  --tc-glow:0 0 20px #00ff4166,0 0 40px #00ff4133;
+  --tc-glow2:0 0 20px #ff333366;
+}
+[data-theme="dracula"]{
+  --tc-bg:#0d0d11;--tc-bg2:#12121a;--tc-surface:#161620;--tc-surface2:#1e1e2a;
+  --tc-border:#2a2a3a;--tc-border2:#3a3a50;
+  --tc-accent:#bd93f9;--tc-accent2:#ff5555;--tc-accent3:#50fa7b;--tc-accent4:#ffb86c;
+  --tc-text:#f8f8f2;--tc-dim:#3a3a50;--tc-dimmer:#252535;
+  --tc-correct:#50fa7b;--tc-incorrect:#ff5555;--tc-cursor:#ffb86c;
+  --tc-glow:0 0 20px #bd93f966,0 0 40px #bd93f933;
+  --tc-glow2:0 0 20px #ff555566;
+}
+[data-theme="light"]{
+  --tc-bg:#f0f0f8;--tc-bg2:#e8e8f4;--tc-surface:#ffffff;--tc-surface2:#f4f4fc;
+  --tc-border:#d0d0e8;--tc-border2:#c0c0e0;
+  --tc-accent:#0055ff;--tc-accent2:#ff0044;--tc-accent3:#7700cc;--tc-accent4:#0099cc;
+  --tc-text:#111128;--tc-dim:#b0b0cc;--tc-dimmer:#d8d8ee;
+  --tc-correct:#0055ff;--tc-incorrect:#ff0044;--tc-cursor:#ff8800;
+  --tc-glow:0 0 20px #0055ff44,0 0 40px #0055ff22;
+  --tc-glow2:0 0 20px #ff004444;
+}
+[data-theme="retro"]{
+  --tc-bg:#0a0800;--tc-bg2:#100d00;--tc-surface:#141000;--tc-surface2:#1a1500;
+  --tc-border:#2a2000;--tc-border2:#3a3000;
+  --tc-accent:#ffcc00;--tc-accent2:#ff6600;--tc-accent3:#00cc88;--tc-accent4:#ff3300;
+  --tc-text:#ffe8aa;--tc-dim:#3a3000;--tc-dimmer:#201800;
+  --tc-correct:#ffcc00;--tc-incorrect:#ff6600;--tc-cursor:#00cc88;
+  --tc-glow:0 0 20px #ffcc0066,0 0 40px #ffcc0033;
+  --tc-glow2:0 0 20px #ff660066;
+}
+
+/* ══════════════════════════════════════
+   ROOT & RESET
+══════════════════════════════════════ */
+:root {
+  --yellow:#ffde00; --yellow-dark:#e6c800; --yellow-light:#fff176;
+  --navy:#0d1f3c; --navy-mid:#112244; --navy-deep:#081428;
+  --black:#0a0a0a; --black-soft:#1a1a1a; --white:#ffffff;
+  --shadow-card:0 12px 40px rgba(0,0,0,0.18),6px 6px 0 #000;
+  --radius-lg:28px; --radius-md:18px; --radius-sm:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background-color:var(--yellow);
+  background-image:
+    radial-gradient(circle at 18% 18%,#fff9a0 0%,transparent 38%),
+    radial-gradient(circle at 5% 85%,#ffe500 0%,transparent 30%);
+  font-family:'DM Mono',monospace;
+  color:var(--black);
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 90% 75% at 110% -10%, var(--navy-deep) 0%, var(--navy-deep) 58%, transparent 59%),
+    radial-gradient(ellipse 80% 68% at 105% -5%, var(--navy-mid) 0%, var(--navy-mid) 48%, transparent 49%),
+    radial-gradient(ellipse 70% 60% at 100% -2%, #1a3a6a 0%, #1a3a6a 36%, transparent 37%);
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' preserveAspectRatio='xMidYMid slice'%3E%3Cpath d='M560,0 C480,80 500,160 420,200 C340,240 320,300 380,360 C440,420 420,500 340,540 C260,580 240,660 300,720 C360,780 340,860 260,900 L1440,900 L1440,0 Z' fill='%230d1f3c' opacity='0.97'/%3E%3Cpath d='M620,0 C540,70 560,150 480,195 C400,240 375,305 440,368 C505,431 480,510 400,552 C320,594 295,670 360,730 C425,790 400,870 315,900 L1440,900 L1440,0 Z' fill='%23112244' opacity='0.95'/%3E%3Cpath d='M700,0 C620,65 640,145 555,193 C470,241 440,310 510,375 C580,440 550,522 465,565 C380,608 350,682 420,742 C490,802 460,878 370,900 L1440,900 L1440,0 Z' fill='%23162d55' opacity='0.9'/%3E%3C/svg%3E");
+  background-size:cover;background-position:center;
+  pointer-events:none;z-index:0;
+}
+#tc-grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ══════════════════════════════════════
+   GLOBAL HEADER — fixed top bar
+══════════════════════════════════════ */
+#tc-global-header{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;height:52px;
+  background:rgba(8,8,16,0.75);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,222,0,0.1);
+}
+#tc-logo-mark{
+  font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--yellow);text-decoration:none;
+  display:flex;align-items:center;gap:8px;
+  transition:opacity 0.2s;
+}
+#tc-logo-mark:hover{opacity:0.8;}
+#tc-logo-mark .logo-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--yellow);
+  box-shadow:0 0 8px var(--yellow);
+  animation:pulse 1.6s ease infinite;
+}
+/* Profile button in global header */
+.tc-profile-btn{
+  font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;
+  background:rgba(255,222,0,0.08);border:1px solid rgba(255,222,0,0.25);
+  color:var(--yellow);padding:5px 12px;border-radius:20px;cursor:pointer;
+  transition:all 0.2s;text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
+}
+.tc-profile-btn:hover{background:rgba(255,222,0,0.18);border-color:var(--yellow);}
+.tc-avatar-mini{
+  width:20px;height:20px;border-radius:50%;
+  background:linear-gradient(135deg,var(--tc-accent),var(--tc-accent3));
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.58rem;font-weight:700;color:var(--tc-bg);
+}
+
+/* ══════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════ */
+#wrapper{
+  position:relative;z-index:2;
+  max-width:980px;margin:0 auto;
+  padding:52px 20px 80px;
+  display:flex;flex-direction:column;align-items:center;gap:36px;
+}
+
+/* ══════════════════════════════════════
+   HERO SECTION
+══════════════════════════════════════ */
+#tc-hero{
+  width:100%;
+  display:flex;flex-direction:column;align-items:center;
+  padding:48px 0 16px;
+  gap:20px;
+  text-align:center;
+}
+.hero-badge{
+  background:var(--black);color:var(--yellow);
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;
+  padding:8px 20px;border-radius:50px;border:2px solid var(--black);
+  box-shadow:3px 3px 0 var(--black-soft);
+  animation:badgePop 0.6s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes badgePop{from{opacity:0;transform:translateY(-16px) scale(0.8);}to{opacity:1;transform:translateY(0) scale(1);}}
+
+.hero-headline{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.8rem,8vw,5.5rem);
+  font-weight:800;text-transform:uppercase;
+  letter-spacing:-0.03em;line-height:0.95;
+  color:var(--black);
+  text-shadow:4px 4px 0 rgba(0,0,0,0.10);
+  animation:headingSlide 0.7s cubic-bezier(.22,1,.36,1) 0.1s both;
+}
+@keyframes headingSlide{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+
+.hero-sub{
+  font-family:'JetBrains Mono',monospace;
+  font-size:clamp(0.78rem,2vw,0.95rem);
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--black);opacity:0.45;
+  animation:headingSlide 0.7s cubic-bezier(.22,1,.36,1) 0.2s both;
+}
+
+/* CTA BUTTONS */
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation:fadeUp 0.6s ease 0.35s both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.btn-primary{
+  background:var(--black);color:var(--yellow);
+  font-family:'Syne',sans-serif;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;
+  padding:14px 34px;border:3px solid var(--black);border-radius:50px;cursor:pointer;
+  box-shadow:5px 5px 0 rgba(0,0,0,0.3);
+  transition:transform 0.18s ease,box-shadow 0.18s ease,background 0.18s ease;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{transform:translateY(-4px);box-shadow:7px 9px 0 rgba(0,0,0,0.35);background:#1a1a1a;}
+.btn-secondary{
+  background:transparent;color:var(--black);
+  font-family:'Syne',sans-serif;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;
+  padding:14px 34px;border:3px solid var(--black);border-radius:50px;cursor:pointer;
+  box-shadow:5px 5px 0 rgba(0,0,0,0.2);
+  transition:transform 0.18s ease,box-shadow 0.18s ease,background 0.18s ease,color 0.18s ease;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-secondary:hover{transform:translateY(-4px);box-shadow:7px 9px 0 rgba(0,0,0,0.25);background:var(--black);color:var(--yellow);}
+
+/* STAT PILLS */
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:fadeUp 0.6s ease 0.45s both;}
+.stat-pill{
+  background:var(--black);color:var(--yellow);
+  font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-weight:700;
+  padding:10px 22px;border-radius:50px;border:2px solid var(--black);
+  box-shadow:4px 4px 0 rgba(0,0,0,0.3);cursor:pointer;
+  transition:transform 0.18s ease,box-shadow 0.18s ease,background 0.18s;white-space:nowrap;
+  text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+}
+.stat-pill:hover{transform:translateY(-3px) scale(1.04);box-shadow:6px 8px 0 rgba(0,0,0,0.35);background:#222;}
+.stat-pill span{color:#fff;font-size:0.65rem;opacity:0.55;margin-left:2px;}
+
+/* ══════════════════════════════════════
+   EXPANDABLE SECTIONS
+══════════════════════════════════════ */
+.expand-section{
+  width:100%;background:var(--white);border:3px solid var(--black);
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-card);overflow:hidden;
+  display:none;animation:fadeUp 0.4s ease both;
+}
+.expand-section.show{display:block;}
+.expand-section-header{
+  background:var(--black);color:var(--yellow);
+  font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  padding:14px 24px;display:flex;align-items:center;justify-content:space-between;
+}
+.expand-close{background:none;border:none;color:rgba(255,222,0,0.5);font-size:1.2rem;cursor:pointer;transition:color 0.2s;padding:0;}
+.expand-close:hover{color:var(--yellow);}
+.expand-body{padding:28px;}
+.expand-body p{font-size:0.9rem;line-height:1.75;color:#333;margin-bottom:14px;}
+.expand-body p:last-child{margin-bottom:0;}
+.expand-body strong{font-weight:700;color:var(--black);background:var(--yellow);padding:1px 5px;border-radius:4px;}
+.expand-body ul{padding-left:18px;margin-top:8px;}
+.expand-body ul li{font-size:0.88rem;line-height:1.7;color:#444;margin-bottom:6px;}
+
+/* ══════════════════════════════════════
+   TYPING SECTION — wider, more premium
+══════════════════════════════════════ */
+#tc-typing-section{
+  width:100%;display:flex;flex-direction:column;gap:10px;
+  animation:fadeUp 0.6s ease 0.5s both;
+}
+
+/* Control bar — ABOVE the typing card */
+#tc-controls-bar{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(8,8,16,0.7);
+  border:1px solid rgba(255,222,0,0.12);
+  border-radius:10px;padding:8px 14px;
+  flex-wrap:wrap;backdrop-filter:blur(10px);
+}
+.tc-mode-group{display:flex;gap:3px;align-items:center;}
+.tc-mode-sep{width:1px;height:18px;background:rgba(255,255,255,0.1);margin:0 6px;}
+.tc-m-btn{
+  background:none;border:1px solid transparent;
+  color:var(--tc-dim);font-family:'JetBrains Mono',monospace;
+  font-size:0.7rem;letter-spacing:0.06em;padding:5px 10px;cursor:pointer;
+  border-radius:5px;transition:all 0.15s;text-transform:uppercase;white-space:nowrap;
+}
+.tc-m-btn:hover{color:var(--tc-text);border-color:var(--tc-border2);}
+.tc-m-btn.active{color:var(--tc-accent);border-color:var(--tc-accent);background:rgba(0,255,170,0.07);text-shadow:0 0 8px var(--tc-accent);}
+.tc-ctrl-label{font-size:0.58rem;color:var(--tc-dim);letter-spacing:0.1em;text-transform:uppercase;margin-right:2px;}
+
+/* Typing card */
+.typing-card{
+  width:100%;border:2px solid rgba(255,222,0,0.15);border-radius:18px;
+  overflow:hidden;background:var(--tc-bg);position:relative;
+  box-shadow:0 24px 60px rgba(0,0,0,0.35),0 0 0 1px rgba(255,222,0,0.05);
+}
+
+/* Live Stats */
+#tc-stats-row{
+  display:flex;gap:8px;align-items:stretch;padding:16px 24px 0;
+}
+.tc-stat-card{
+  background:var(--tc-surface);border:1px solid var(--tc-border);
+  border-radius:10px;padding:12px 20px;
+  display:flex;flex-direction:column;gap:3px;
+  position:relative;overflow:hidden;flex:1;min-width:80px;
+  transition:border-color 0.3s;
+}
+.tc-stat-card:hover{border-color:var(--tc-border2);}
+.tc-sc-val{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:700;color:var(--tc-accent);line-height:1;}
+.tc-sc-lbl{font-size:0.54rem;color:var(--tc-dim);letter-spacing:0.16em;text-transform:uppercase;margin-top:2px;}
+
+/* Progress bar */
+#tc-progress-wrap{position:relative;height:3px;background:var(--tc-dimmer);margin:14px 24px 0;}
+#tc-progress-fill{height:100%;width:0%;border-radius:2px;background:linear-gradient(90deg,var(--tc-accent),var(--tc-accent4));box-shadow:0 0 12px var(--tc-accent);transition:width 0.2s linear;}
+
+/* Typing box — the hero — wider, taller */
+#tc-type-container{
+  background:var(--tc-surface);
+  border-top:1px solid var(--tc-border);
+  padding:0;position:relative;overflow:hidden;cursor:text;
+  margin:14px 24px 0;border-radius:10px;
+  transition:border-color 0.3s,box-shadow 0.3s;
+  border:1px solid var(--tc-border);
+}
+#tc-type-container:focus-within{border-color:rgba(0,255,170,0.4);box-shadow:0 0 0 1px rgba(0,255,170,0.15),0 0 40px rgba(0,255,170,0.08);}
+#tc-type-container::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:4;background:linear-gradient(to right,var(--tc-surface) 0%,var(--tc-surface) 2%,transparent 10%,transparent 90%,var(--tc-surface) 98%,var(--tc-surface) 100%);}
+#tc-type-container::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,var(--tc-accent) 50%,transparent 100%);opacity:0.5;z-index:5;}
+#tc-type-box{height:130px;position:relative;overflow:hidden;}
+#tc-cursor-bar{position:absolute;left:200px;top:50%;transform:translateY(-50%);width:2.5px;height:58px;border-radius:2px;background:var(--tc-cursor);box-shadow:0 0 12px var(--tc-cursor),0 0 28px rgba(255,204,0,0.53);animation:cursorBlink 0.9s steps(1) infinite;z-index:6;}
+@keyframes cursorBlink{0%,100%{opacity:1;}50%{opacity:0;}}
+#tc-rail{position:absolute;top:50%;left:0;transform:translateY(-50%) translateX(0px);white-space:nowrap;display:flex;align-items:center;z-index:2;will-change:transform;}
+/* Larger word/character size */
+.tc-w{display:inline-flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:1.6rem;letter-spacing:0.06em;line-height:1;padding:0 0.35em;position:relative;white-space:nowrap;}
+.tc-w.done{opacity:0.2;}
+.tc-w.error-word::after{content:'';position:absolute;bottom:-10px;left:0.35em;right:0.35em;height:2px;background:var(--tc-incorrect);border-radius:1px;box-shadow:var(--tc-glow2);}
+.tc-c{display:inline;color:var(--tc-dim);transition:color 0.06s,text-shadow 0.06s;}
+.tc-c.ok{color:var(--tc-correct);}
+.tc-c.err{color:var(--tc-incorrect);text-decoration:line-through;text-decoration-color:var(--tc-incorrect);}
+.tc-c.cur{color:var(--tc-text);font-weight:500;text-shadow:0 0 12px var(--tc-cursor),0 0 24px rgba(255,204,0,0.4);}
+#tc-inp{position:absolute;opacity:0;pointer-events:none;left:0;top:0;width:1px;height:1px;}
+
+/* Bottom hints */
+#tc-bottom-bar{display:flex;justify-content:center;align-items:center;gap:24px;padding:10px 24px 14px;opacity:0.4;}
+#tc-bottom-bar span{font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--tc-dim);}
+kbd{display:inline-block;background:var(--tc-surface2);border:1px solid var(--tc-border2);border-radius:3px;padding:1px 6px;font-family:'JetBrains Mono',monospace;font-size:0.56rem;color:var(--tc-dim);}
+
+/* Heatmap */
+#tc-heatmap-wrap{display:none;background:var(--tc-surface);border-top:1px solid var(--tc-border);padding:18px 24px;}
+#tc-heatmap-wrap.show{display:block;}
+.tc-heatmap-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.tc-heatmap-title{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--tc-accent);letter-spacing:0.15em;text-transform:uppercase;}
+.tc-heatmap-hint{font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--tc-dim);letter-spacing:0.08em;opacity:0.7;}
+.tc-kb-wrap{overflow-x:auto;padding-bottom:4px;}
+.tc-kb-row{display:flex;gap:4px;margin-bottom:4px;align-items:flex-end;}
+.tc-kb-row.row-q{padding-left:16px;}
+.tc-kb-row.row-a{padding-left:28px;}
+.tc-kb-row.row-z{padding-left:48px;}
+/* Heatmap keys — real-time animated */
+.tc-kb-key{
+  min-width:35px;width:35px;height:35px;border-radius:6px;
+  background:var(--tc-surface2);border:1.5px solid var(--tc-border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:0.62rem;color:var(--tc-dim);font-family:'JetBrains Mono',monospace;
+  position:relative;
+  transition:background 0.35s cubic-bezier(.22,1,.36,1),border-color 0.35s,color 0.25s,transform 0.15s,box-shadow 0.35s;
+  cursor:default;
+}
+.tc-kb-key:hover{transform:scale(1.2);z-index:10;}
+.tc-kb-key .key-char{font-size:0.64rem;line-height:1;font-weight:600;}
+.tc-kb-key .key-hits{font-size:0.44rem;line-height:1;opacity:0.8;margin-top:2px;}
+
+/* Heat intensity — usage frequency */
+.tc-kb-key[data-heat="1"]{background:hsla(200,80%,28%,0.85);border-color:hsla(200,80%,55%,0.9);color:#b8e8ff;}
+.tc-kb-key[data-heat="2"]{background:hsla(185,85%,30%,0.9);border-color:hsla(185,85%,58%,1);color:#fff;box-shadow:0 0 6px hsla(185,85%,30%,0.4);}
+.tc-kb-key[data-heat="3"]{background:hsla(160,85%,32%,0.9);border-color:hsla(160,85%,58%,1);color:#fff;box-shadow:0 0 8px hsla(160,85%,32%,0.5);}
+.tc-kb-key[data-heat="4"]{background:hsla(120,85%,36%,0.9);border-color:hsla(120,85%,62%,1);color:#fff;box-shadow:0 0 10px hsla(120,85%,36%,0.6);}
+.tc-kb-key[data-heat="5"]{background:hsla(60,95%,42%,0.9);border-color:hsla(60,95%,65%,1);color:#000;box-shadow:0 0 12px hsla(60,95%,42%,0.6);}
+.tc-kb-key[data-heat="6"]{background:hsla(30,95%,44%,0.95);border-color:hsla(30,95%,65%,1);color:#fff;box-shadow:0 0 14px hsla(30,95%,44%,0.65);}
+.tc-kb-key[data-heat="7"]{background:hsla(0,90%,45%,0.95);border-color:hsla(0,90%,68%,1);color:#fff;box-shadow:0 0 16px hsla(0,90%,45%,0.7);}
+/* Error flash */
+.tc-kb-key.key-error{animation:keyError 0.35s ease forwards;}
+@keyframes keyError{0%{background:hsla(0,90%,50%,0.95);border-color:#ff4444;box-shadow:0 0 20px rgba(255,68,68,0.8);}100%{}}
+/* Press pulse */
+.tc-kb-key.key-press{animation:keyPress 0.25s cubic-bezier(.34,1.56,.64,1) forwards;}
+@keyframes keyPress{0%{transform:scale(1.35);}100%{transform:scale(1);}}
+
+/* Legend */
+.tc-hm-legend{display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap;}
+.tc-hm-legend-label{font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--tc-dim);letter-spacing:0.1em;text-transform:uppercase;}
+.tc-hm-swatches{display:flex;gap:5px;align-items:center;}
+.tc-hm-swatch{display:flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:0.5rem;color:var(--tc-dim);letter-spacing:0.06em;}
+.tc-hm-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+.tc-hm-stats{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;}
+.tc-hm-stat{background:var(--tc-surface2);border:1px solid var(--tc-border);border-radius:6px;padding:6px 12px;}
+.tc-hm-stat-val{font-family:'JetBrains Mono',monospace;font-size:0.95rem;color:var(--tc-accent);}
+.tc-hm-stat-lbl{font-size:0.5rem;color:var(--tc-dim);letter-spacing:0.12em;text-transform:uppercase;}
+.tc-hm-keys{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.tc-hm-key-badge{display:flex;align-items:center;gap:6px;background:var(--tc-surface2);border:1px solid var(--tc-border);border-radius:6px;padding:5px 10px;}
+.tc-hm-key-badge .badge-key{font-family:'JetBrains Mono',monospace;font-size:0.88rem;min-width:24px;text-align:center;}
+.tc-hm-key-badge .badge-info{font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--tc-dim);line-height:1.5;}
+.tc-hm-key-badge.worst .badge-key{color:var(--tc-incorrect);}
+.tc-hm-key-badge.best .badge-key{color:var(--tc-correct);}
+
+/* ══════════════════════════════════════
+   RESULT OVERLAY — unified style, compact modal
+══════════════════════════════════════ */
+#tc-result-overlay{
+  display:none;position:fixed;inset:0;z-index:510;
+  background:rgba(8,8,16,0.88);backdrop-filter:blur(20px);
+  align-items:center;justify-content:center;
+}
+#tc-result-overlay.show{display:flex;animation:overlayIn 0.35s ease;}
+@keyframes overlayIn{from{opacity:0;}to{opacity:1;}}
+#tc-result-card{
+  background:var(--tc-surface);
+  border:1px solid rgba(0,255,170,0.22);
+  border-radius:20px;padding:32px 40px 28px;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+  box-shadow:0 0 60px rgba(0,255,170,0.08),0 0 0 1px rgba(0,255,170,0.05);
+  animation:cardIn 0.38s cubic-bezier(0.34,1.56,0.64,1);
+  position:relative;overflow:hidden;
+  min-width:360px;max-width:480px;width:90%;
+}
+@keyframes cardIn{from{transform:scale(0.88);opacity:0;}to{transform:scale(1);opacity:1;}}
+/* Subtle glow bg */
+#tc-result-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 0%, rgba(0,255,170,0.06) 0%, transparent 70%);
+  pointer-events:none;z-index:0;
+}
+#tc-result-card>*{position:relative;z-index:1;}
+
+.tc-r-badge{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.28em;color:var(--tc-accent);text-transform:uppercase;
+  background:rgba(0,255,170,0.08);border:1px solid rgba(0,255,170,0.2);
+  padding:5px 16px;border-radius:50px;
+}
+.tc-r-wpm{
+  font-family:'Syne',sans-serif;font-size:5rem;font-weight:800;
+  color:var(--tc-accent);text-shadow:var(--tc-glow);line-height:1;
+  letter-spacing:-0.03em;
+}
+.tc-r-wpm-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem;letter-spacing:0.28em;color:var(--tc-dim);text-transform:uppercase;margin-top:-14px;
+}
+.tc-r-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;}
+.tc-rs{text-align:center;background:var(--tc-surface2);border:1px solid var(--tc-border);border-radius:8px;padding:10px 6px;}
+.tc-rs-val{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;line-height:1;}
+.tc-rs-val.a{color:var(--tc-accent2);}
+.tc-rs-val.b{color:var(--tc-accent4);}
+.tc-rs-val.c{color:var(--tc-accent3);}
+.tc-rs-val.d{color:#a88fff;}
+.tc-rs-lbl{font-family:'JetBrains Mono',monospace;font-size:0.5rem;color:var(--tc-dim);letter-spacing:0.15em;text-transform:uppercase;margin-top:5px;}
+.tc-r-divider{width:100%;height:1px;background:var(--tc-border);}
+.tc-r-graph-wrap{width:100%;background:var(--tc-surface2);border:1px solid var(--tc-border);border-radius:8px;padding:10px 12px;}
+.tc-r-graph-label{font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--tc-dim);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;}
+#tc-result-graph{width:100%;height:65px;display:block;}
+.tc-r-btn-row{display:flex;gap:8px;}
+.tc-r-btn{
+  background:none;border:1px solid var(--tc-border2);color:var(--tc-dim);
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;
+  padding:9px 20px;cursor:pointer;border-radius:8px;transition:all 0.15s;text-transform:uppercase;
+}
+.tc-r-btn:hover{color:var(--tc-text);border-color:var(--tc-dim);}
+.tc-r-btn.primary{border-color:var(--tc-accent);color:var(--tc-accent);box-shadow:0 0 12px rgba(0,255,170,0.1);}
+.tc-r-btn.primary:hover{box-shadow:0 0 22px rgba(0,255,170,0.24);}
+
+/* ══════════════════════════════════════
+   ACHIEVEMENTS
+══════════════════════════════════════ */
+#tc-achievement-wrap{position:fixed;bottom:30px;right:30px;z-index:600;display:flex;flex-direction:column;gap:8px;}
+.tc-achievement{background:var(--tc-surface);border:1px solid var(--tc-accent);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 0 20px rgba(0,255,170,0.2);animation:achieveIn 0.4s cubic-bezier(0.34,1.56,0.64,1);cursor:pointer;max-width:280px;}
+@keyframes achieveIn{from{transform:translateX(120%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+.tc-achievement-icon{font-size:1.5rem;}
+.tc-achievement-title{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--tc-accent);letter-spacing:0.1em;}
+.tc-achievement-desc{font-size:0.6rem;color:var(--tc-dim);margin-top:2px;}
+
+/* ══════════════════════════════════════
+   COMBO
+══════════════════════════════════════ */
+#tc-combo-display{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;color:var(--tc-accent);text-shadow:var(--tc-glow);pointer-events:none;z-index:700;opacity:0;}
+#tc-combo-display.pop{animation:comboPop 0.6s ease forwards;}
+@keyframes comboPop{0%{opacity:0;transform:translate(-50%,-50%) scale(0.5);}40%{opacity:1;transform:translate(-50%,-50%) scale(1.2);}70%{opacity:1;transform:translate(-50%,-50%) scale(1);}100%{opacity:0;transform:translate(-50%,-60%) scale(0.9);}}
+
+/* ══════════════════════════════════════
+   CUSTOM MODAL
+══════════════════════════════════════ */
+#tc-custom-modal{display:none;position:fixed;inset:0;z-index:450;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);align-items:center;justify-content:center;}
+#tc-custom-modal.show{display:flex;}
+#tc-custom-card{background:var(--tc-surface);border:1px solid var(--tc-border);border-radius:14px;padding:28px;width:500px;max-width:90vw;}
+.tc-modal-title{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--tc-accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:14px;}
+#tc-custom-textarea{width:100%;background:var(--tc-surface2);border:1px solid var(--tc-border);color:var(--tc-text);font-family:'JetBrains Mono',monospace;font-size:0.88rem;padding:12px;border-radius:6px;outline:none;resize:vertical;min-height:120px;margin-bottom:12px;}
+#tc-custom-textarea:focus{border-color:var(--tc-accent);}
+.tc-modal-btn-row{display:flex;gap:8px;justify-content:flex-end;}
+
+/* ══════════════════════════════════════
+   PROFILE PANEL
+══════════════════════════════════════ */
+#tc-profile-panel{display:none;position:fixed;right:20px;top:60px;z-index:400;background:var(--tc-surface);border:1px solid var(--tc-border);border-radius:14px;padding:20px;width:270px;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+#tc-profile-panel.show{display:block;animation:panelIn 0.2s ease;}
+@keyframes panelIn{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+.tc-pp-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--tc-accent),var(--tc-accent3));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--tc-bg);margin:0 auto 10px;box-shadow:var(--tc-glow);}
+.tc-pp-name-input{width:100%;background:var(--tc-surface2);border:1px solid var(--tc-border);color:var(--tc-text);font-family:'JetBrains Mono',monospace;font-size:0.82rem;padding:6px 10px;border-radius:6px;text-align:center;outline:none;margin-bottom:10px;}
+.tc-pp-name-input:focus{border-color:var(--tc-accent);}
+.tc-pp-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.tc-pp-stat{background:var(--tc-surface2);border-radius:6px;padding:8px 10px;border:1px solid var(--tc-border);}
+.tc-pp-stat-val{font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--tc-accent);}
+.tc-pp-stat-lbl{font-size:0.54rem;color:var(--tc-dim);letter-spacing:0.12em;text-transform:uppercase;}
+.tc-xp-bar-wrap{background:var(--tc-dimmer);border-radius:4px;height:6px;overflow:hidden;margin-bottom:6px;}
+.tc-xp-bar{height:100%;background:linear-gradient(90deg,var(--tc-accent),var(--tc-accent3));border-radius:4px;transition:width 0.5s;}
+.tc-pp-rank{font-size:0.6rem;color:var(--tc-accent);font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;}
+
+/* ══════════════════════════════════════
+   CARD BASE
+══════════════════════════════════════ */
+.card{
+  width:100%;background:var(--white);
+  border:3px solid var(--black);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);overflow:hidden;
+  transition:transform 0.22s ease,box-shadow 0.22s ease;
+  animation:fadeUp 0.6s ease 0.35s both;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.22),8px 10px 0 #000;}
+.card-header{
+  background:var(--black);color:var(--yellow);
+  font-family:'Syne',sans-serif;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;
+  padding:14px 28px;display:flex;align-items:center;gap:10px;
+}
+.card-header .dot{width:9px;height:9px;border-radius:50%;background:var(--yellow);box-shadow:0 0 8px var(--yellow);animation:pulse 1.6s ease infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.75);}}
+.card-body{padding:32px;}
+
+/* ══════════════════════════════════════
+   QUOTE BLOCK
+══════════════════════════════════════ */
+.quote-block{
+  background:var(--black);border-radius:var(--radius-md);padding:28px 32px;
+  border:3px solid var(--black);position:relative;overflow:hidden;
+  cursor:default;transition:transform 0.22s ease,box-shadow 0.22s ease;
+  box-shadow:5px 5px 0 rgba(0,0,0,0.2);
+}
+.quote-block:hover{transform:translateY(-4px) rotate(-0.5deg);box-shadow:8px 10px 0 rgba(0,0,0,0.25);}
+.quote-block::before{content:'"';font-family:'Syne',sans-serif;font-size:10rem;color:rgba(255,222,0,0.06);position:absolute;top:-30px;left:10px;line-height:1;pointer-events:none;}
+.quote-text{font-family:'Syne',sans-serif;font-size:clamp(1.1rem,3vw,1.55rem);letter-spacing:0.01em;color:var(--yellow);line-height:1.35;text-transform:uppercase;position:relative;z-index:1;}
+.quote-author{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:rgba(255,222,0,0.45);letter-spacing:0.15em;text-transform:uppercase;position:relative;z-index:1;}
+
+/* ══════════════════════════════════════
+   TIPS GRID
+══════════════════════════════════════ */
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.tip-card{
+  background:var(--yellow);border:2.5px solid var(--black);
+  border-radius:var(--radius-md);padding:22px 20px;
+  box-shadow:4px 4px 0 var(--black);cursor:default;
+  transition:transform 0.2s ease,box-shadow 0.2s ease;
+  position:relative;overflow:hidden;
+}
+.tip-card::before{content:'';position:absolute;inset:0;background:var(--black);transform:translateY(101%);transition:transform 0.25s ease;z-index:0;border-radius:inherit;}
+.tip-card:hover::before{transform:translateY(0);}
+.tip-card:hover{transform:translateY(-5px);box-shadow:6px 9px 0 var(--black);}
+.tip-card:hover .tip-icon,.tip-card:hover .tip-label,.tip-card:hover .tip-desc{color:var(--yellow);}
+.tip-icon,.tip-label,.tip-desc{position:relative;z-index:1;}
+.tip-icon{font-size:1.6rem;margin-bottom:10px;display:block;}
+.tip-label{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--black);}
+.tip-desc{font-size:0.78rem;color:var(--black-soft);margin-top:8px;line-height:1.6;opacity:0.75;}
+
+/* ══════════════════════════════════════
+   WPM PROGRESSION CHART
+══════════════════════════════════════ */
+.wpm-section{display:flex;flex-direction:column;gap:24px;}
+.wpm-row{display:flex;flex-direction:column;gap:8px;}
+.wpm-label-row{display:flex;justify-content:space-between;align-items:center;}
+.wpm-label-left{display:flex;align-items:center;gap:10px;}
+.wpm-label{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--black);}
+.wpm-value{font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:700;color:var(--black-soft);opacity:0.6;}
+.wpm-bar-track{height:14px;background:#e8e8e8;border-radius:50px;border:2px solid var(--black);overflow:visible;box-shadow:inset 0 2px 4px rgba(0,0,0,0.1);position:relative;}
+.wpm-bar-fill{height:100%;background:var(--black);border-radius:50px;position:relative;transition:width 1.2s cubic-bezier(.22,1,.36,1);overflow:hidden;}
+.wpm-bar-fill::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:rgba(255,255,255,0.3);transform:skewX(-20deg);animation:shimmer 2s ease infinite;}
+@keyframes shimmer{from{left:-60%;}to{left:130%;}}
+.wpm-bar-fill.yellow{background:var(--yellow-dark);}
+.wpm-bar-fill.accent{background:#ff6b00;}
+.wpm-bar-fill.goal{background:linear-gradient(90deg,#ff6b00,var(--black));}
+.wpm-stage-star{display:none;align-items:center;gap:4px;background:var(--black);color:var(--yellow);font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:700;padding:3px 8px;border-radius:50px;letter-spacing:0.08em;text-transform:uppercase;box-shadow:2px 2px 0 rgba(0,0,0,0.3);white-space:nowrap;}
+.wpm-stage-star.show{display:inline-flex;}
+.wpm-stage-star::before{content:'★';font-size:0.75rem;}
+
+/* ══════════════════════════════════════
+   BODY TEXT
+══════════════════════════════════════ */
+.body-text{font-size:0.92rem;line-height:1.8;color:#333;}
+.body-text strong{font-weight:700;color:var(--black);background:var(--yellow);padding:1px 5px;border-radius:4px;}
+
+/* ══════════════════════════════════════
+   VIDEO SECTION
+══════════════════════════════════════ */
+.video-card{border-radius:var(--radius-lg);animation-delay:0.4s;}
+.video-thumb-link{display:block;text-decoration:none;position:relative;overflow:hidden;border-top:3px solid var(--black);cursor:pointer;}
+.video-thumb-img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;transition:transform 0.4s ease;filter:brightness(0.88);position:relative;z-index:0;}
+.video-thumb-link:hover .video-thumb-img{transform:scale(1.03);filter:brightness(1);}
+.video-play-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(0,0,0,0.28);transition:background 0.3s;z-index:1;}
+.video-thumb-link:hover .video-play-overlay{background:rgba(0,0,0,0.14);}
+.play-btn{width:72px;height:72px;border-radius:50%;background:var(--yellow);border:3px solid var(--black);display:flex;align-items:center;justify-content:center;box-shadow:4px 4px 0 rgba(0,0,0,0.4);transition:transform 0.2s ease,box-shadow 0.2s ease;font-size:1.8rem;}
+.video-thumb-link:hover .play-btn{transform:scale(1.1);box-shadow:6px 6px 0 rgba(0,0,0,0.5);}
+.video-play-label{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:0.06em;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,0.8);}
+.video-play-sublabel{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:rgba(255,255,255,0.75);letter-spacing:0.1em;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,0.8);}
+.credit-strip{background:var(--yellow);border-top:3px solid var(--black);padding:18px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.credit-avatar{width:44px;height:44px;background:var(--black);border-radius:50%;border:3px solid var(--black);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--yellow);flex-shrink:0;box-shadow:3px 3px 0 rgba(0,0,0,0.2);transition:transform 0.18s ease;}
+.credit-avatar:hover{transform:rotate(-8deg) scale(1.1);}
+.credit-info{flex:1;min-width:180px;}
+.credit-channel{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.04em;color:var(--black);}
+.credit-title{font-size:0.77rem;color:var(--black-soft);opacity:0.7;margin-top:3px;line-height:1.4;}
+.credit-badge{background:var(--black);color:var(--yellow);font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;padding:5px 14px;border-radius:50px;white-space:nowrap;box-shadow:3px 3px 0 rgba(0,0,0,0.25);transition:transform 0.18s ease,box-shadow 0.18s ease;}
+.credit-badge:hover{transform:translateY(-2px);box-shadow:4px 5px 0 rgba(0,0,0,0.3);}
+
+/* ══════════════════════════════════════
+   AD SLOTS — auto-hide when empty
+══════════════════════════════════════ */
+.ad-slot{
+  width:100%;background:rgba(0,0,0,0.06);border:2px dashed rgba(0,0,0,0.18);
+  border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:rgba(0,0,0,0.32);
+  letter-spacing:0.12em;text-transform:uppercase;transition:background 0.2s;overflow:hidden;position:relative;
+}
+.ad-slot.hidden{display:none;}
+.ad-slot.banner{height:90px;}
+.ad-slot.rect{height:250px;max-width:300px;align-self:center;}
+.ad-slot-spacer{height:32px;}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer{width:100%;border-top:2px solid rgba(0,0,0,0.15);padding-top:24px;display:flex;flex-direction:column;align-items:center;gap:16px;}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;}
+.footer-links a{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.14em;color:var(--black);opacity:0.45;text-transform:uppercase;text-decoration:none;transition:opacity 0.18s;}
+.footer-links a:hover{opacity:0.85;}
+.footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;color:var(--black);opacity:0.3;text-transform:uppercase;}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media(max-width:640px){
+  #wrapper{padding:52px 14px 60px;gap:24px;}
+  #tc-hero{padding:28px 0 10px;}
+  .hero-headline{font-size:clamp(2rem,10vw,3.5rem);}
+  .card-body{padding:20px 18px;}
+  .tips-grid{grid-template-columns:1fr 1fr;}
+  #tc-stats-row{flex-wrap:wrap;}
+  .tc-stat-card{min-width:calc(50% - 4px);}
+  #tc-result-card{padding:22px 16px 18px;min-width:unset;}
+  .tc-r-stats-grid{grid-template-columns:1fr 1fr;}
+  .tc-r-wpm{font-size:3.8rem;}
+  .tc-kb-key{min-width:28px;width:28px;height:28px;font-size:0.52rem;}
+  #tc-type-container{margin:12px 14px 0;}
+  #tc-stats-row{padding:14px 14px 0;}
+  #tc-progress-wrap{margin:12px 14px 0;}
+  #tc-heatmap-wrap{padding:14px;}
+  #tc-bottom-bar{padding:8px 14px 12px;}
+  #tc-global-header{padding:0 16px;}
+}
+@media(max-width:380px){
+  .tips-grid{grid-template-columns:1fr;}
+  .tc-sc-val{font-size:1.6rem;}
+  .tc-r-stats-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+<div id="tc-grain"></div>
+
+<!-- ═══ GLOBAL OVERLAYS ═══ -->
+<div id="tc-combo-display"></div>
+<div id="tc-achievement-wrap"></div>
+
+<!-- ═══ GLOBAL HEADER ═══ -->
+<header id="tc-global-header">
+  <a id="tc-logo-mark" href="#">
+    <span class="logo-dot"></span>
+    TypeCore
+  </a>
+  <button class="tc-profile-btn" onclick="tcToggleProfile()">
+    <div class="tc-avatar-mini" id="tc-avatar-chip">U</div>
+    <span id="tc-chip-name">User</span>
+    <span style="opacity:0.5;font-size:0.56rem;" id="tc-chip-rank">ROOKIE</span>
+  </button>
+</header>
+
+<!-- ═══ PROFILE PANEL ═══ -->
+<div id="tc-profile-panel">
+  <div class="tc-pp-avatar" id="tc-pp-avatar">U</div>
+  <input class="tc-pp-name-input" id="tc-pp-name-input" placeholder="Enter username" value="User"/>
+  <div class="tc-pp-stats" id="tc-pp-stats"></div>
+  <div class="tc-xp-bar-wrap"><div class="tc-xp-bar" id="tc-xp-bar" style="width:0%"></div></div>
+  <div class="tc-pp-rank" id="tc-pp-rank-label">ROOKIE · 0 XP</div>
+</div>
+
+<!-- ═══ CUSTOM TEXT MODAL ═══ -->
+<div id="tc-custom-modal">
+  <div id="tc-custom-card">
+    <div class="tc-modal-title">✏ Custom Text</div>
+    <textarea id="tc-custom-textarea" placeholder="Paste your custom text here..."></textarea>
+    <div class="tc-modal-btn-row">
+      <button class="tc-r-btn" onclick="tcCloseCustom()">Cancel</button>
+      <button class="tc-r-btn primary" onclick="tcApplyCustom()">Apply</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RESULT OVERLAY ═══ -->
+<div id="tc-result-overlay">
+  <div id="tc-result-card">
+    <div class="tc-r-badge">✦ Test Complete ✦</div>
+    <div class="tc-r-wpm" id="tc-r-wpm">0</div>
+    <div class="tc-r-wpm-label">Words Per Minute</div>
+    <div class="tc-r-divider"></div>
+    <div class="tc-r-stats-grid">
+      <div class="tc-rs"><div class="tc-rs-val a" id="tc-r-acc">0%</div><div class="tc-rs-lbl">Accuracy</div></div>
+      <div class="tc-rs"><div class="tc-rs-val b" id="tc-r-raw">0</div><div class="tc-rs-lbl">Raw WPM</div></div>
+      <div class="tc-rs"><div class="tc-rs-val c" id="tc-r-time">0s</div><div class="tc-rs-lbl">Time</div></div>
+      <div class="tc-rs"><div class="tc-rs-val d" id="tc-r-chars">0</div><div class="tc-rs-lbl">Chars</div></div>
+    </div>
+    <div class="tc-r-graph-wrap">
+      <div class="tc-r-graph-label">Speed over time (WPM)</div>
+      <canvas id="tc-result-graph" height="65"></canvas>
+    </div>
+    <div class="tc-r-btn-row">
+      <button class="tc-r-btn primary" onclick="tcRestartTest()">↺ Restart</button>
+      <button class="tc-r-btn" onclick="tcSaveScore()">💾 Save</button>
+      <button class="tc-r-btn" onclick="tcCloseResult()">✕ Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     MAIN WRAPPER
+═══════════════════════════════════ -->
+<div id="wrapper">
+
+  <!-- HERO -->
+  <section id="tc-hero">
+    <div class="hero-badge">Typing Mastery Programme</div>
+    <h1 class="hero-headline">Start With Your<br>Fingertips</h1>
+    <p class="hero-sub">The professional typing platform · 0 to 150 WPM</p>
+    <div class="cta-row">
+      <a href="#typing-test" class="btn-primary">⚡ Start Typing Test</a>
+      <a href="#video" class="btn-secondary">▶ Watch Tutorial</a>
+    </div>
+    <div class="stat-row">
+      <button class="stat-pill" onclick="tcToggleSection('sec-goal')">150 WPM <span>GOAL</span></button>
+      <button class="stat-pill" onclick="tcToggleSection('sec-accuracy')">99% <span>ACCURACY</span></button>
+      <button class="stat-pill" onclick="tcToggleSection('sec-journey')">0 → 150 <span>JOURNEY</span></button>
+      <button class="stat-pill" onclick="tcToggleSection('sec-fingers')">10-FINGER <span>METHOD</span></button>
+    </div>
+  </section>
+
+  <!-- EXPANDABLE: 150 WPM Goal -->
+  <div class="expand-section" id="sec-goal">
+    <div class="expand-section-header">150 WPM Goal Tracking<button class="expand-close" onclick="tcToggleSection('sec-goal')">✕</button></div>
+    <div class="expand-body">
+      <p>The <strong>150 WPM goal</strong> is achievable for anyone willing to practice deliberately. Most people plateau around 40–60 WPM because they rely on bad habits — looking at the keyboard, using wrong fingers, or practicing without intention.</p>
+      <p>Timeline to reach 150 WPM with daily 15-minute sessions:</p>
+      <ul>
+        <li><strong>0 → 50 WPM</strong> — 1–3 months (learn home row, stop looking down)</li>
+        <li><strong>50 → 100 WPM</strong> — 3–6 months (smooth rhythm, reduce errors)</li>
+        <li><strong>100 → 150 WPM</strong> — 6–18 months (mental buffering, flow state)</li>
+      </ul>
+      <p>Use the typing test above daily. Track your WPM every week. Celebrate every +5 WPM milestone.</p>
+    </div>
+  </div>
+
+  <!-- EXPANDABLE: Accuracy -->
+  <div class="expand-section" id="sec-accuracy">
+    <div class="expand-section-header">99% Accuracy Improvement<button class="expand-close" onclick="tcToggleSection('sec-accuracy')">✕</button></div>
+    <div class="expand-body">
+      <p><strong>Accuracy always beats speed.</strong> A 70 WPM typist at 98% accuracy outperforms a 90 WPM typist at 80% accuracy in real-world productivity because backspacing and correcting waste far more time than typing slowly.</p>
+      <ul>
+        <li>Slow down by 20% until your accuracy exceeds 95%</li>
+        <li>Use the <strong>heatmap</strong> to identify your weakest keys</li>
+        <li>Drill problematic letter combinations (th, er, ing, ion)</li>
+        <li>Never look at your hands — ever</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EXPANDABLE: Journey -->
+  <div class="expand-section" id="sec-journey">
+    <div class="expand-section-header">0 → 150 Learning Roadmap<button class="expand-close" onclick="tcToggleSection('sec-journey')">✕</button></div>
+    <div class="expand-body">
+      <p>The journey from hunt-and-peck to <strong>150 WPM mastery</strong> has four distinct stages, each requiring different habits:</p>
+      <ul>
+        <li><strong>Stage 0 (0–25 WPM)</strong> — Learn the keyboard layout. Never look down. Accept feeling slow.</li>
+        <li><strong>Stage 1 (25–50 WPM)</strong> — Build muscle memory for home row. Use all ten fingers consistently.</li>
+        <li><strong>Stage 2 (50–100 WPM)</strong> — Develop rhythm. Read ahead while typing. Reduce correction frequency.</li>
+        <li><strong>Stage 3 (100–150 WPM)</strong> — Achieve flow state. Think in words not letters. Eliminate hesitation.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EXPANDABLE: Fingers -->
+  <div class="expand-section" id="sec-fingers">
+    <div class="expand-section-header">10-Finger Placement Guide<button class="expand-close" onclick="tcToggleSection('sec-fingers')">✕</button></div>
+    <div class="expand-body">
+      <p>The <strong>10-finger method</strong> (touch typing) assigns specific fingers to specific keys. The home row is ASDF for the left hand and JKL; for the right.</p>
+      <ul>
+        <li><strong>Left pinky:</strong> Q, A, Z and Tab/Shift</li>
+        <li><strong>Left ring:</strong> W, S, X</li>
+        <li><strong>Left middle:</strong> E, D, C</li>
+        <li><strong>Left index:</strong> R, F, V, T, G, B</li>
+        <li><strong>Right index:</strong> Y, H, N, U, J, M</li>
+        <li><strong>Right middle:</strong> I, K, comma</li>
+        <li><strong>Right ring:</strong> O, L, period</li>
+        <li><strong>Right pinky:</strong> P, semicolon, slash and Enter/Shift</li>
+        <li><strong>Both thumbs:</strong> Space bar (alternate thumbs)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════ TYPING TEST ═══════ -->
+  <section id="tc-typing-section" id="typing-test">
+
+    <!-- Control bar — above typing card -->
+    <div id="tc-controls-bar">
+      <div class="tc-mode-group">
+        <span class="tc-ctrl-label">Time</span>
+        <button class="tc-m-btn" data-tcmode="time" data-tcval="15">15s</button>
+        <button class="tc-m-btn active" data-tcmode="time" data-tcval="30">30s</button>
+        <button class="tc-m-btn" data-tcmode="time" data-tcval="60">60s</button>
+        <button class="tc-m-btn" data-tcmode="time" data-tcval="120">120s</button>
+        <button class="tc-m-btn" data-tcmode="time" data-tcval="0">∞</button>
+      </div>
+      <div class="tc-mode-sep"></div>
+      <div class="tc-mode-group">
+        <span class="tc-ctrl-label">Mode</span>
+        <button class="tc-m-btn active" data-tcmode="type" data-tcval="words">Words</button>
+        <button class="tc-m-btn" data-tcmode="type" data-tcval="numbers">Numbers</button>
+        <button class="tc-m-btn" data-tcmode="type" data-tcval="symbols">Symbols</button>
+        <button class="tc-m-btn" data-tcmode="type" data-tcval="quotes">Quotes</button>
+        <button class="tc-m-btn" data-tcmode="type" data-tcval="custom" onclick="tcOpenCustom()">Custom</button>
+      </div>
+      <div class="tc-mode-sep"></div>
+      <div class="tc-mode-group">
+        <button class="tc-m-btn" onclick="tcRestartTest()">↺ Restart</button>
+        <button class="tc-m-btn" id="tc-heatmap-toggle-btn" onclick="tcToggleHeatmap()">⌨ Heatmap</button>
+      </div>
+    </div>
+
+    <!-- Typing card -->
+    <div class="typing-card" id="typing-test">
+
+      <!-- Live Stats: WPM, Accuracy, Time, Errors -->
+      <div id="tc-stats-row">
+        <div class="tc-stat-card">
+          <div class="tc-sc-val" id="tc-wpm-val" style="color:var(--tc-accent)">0</div>
+          <div class="tc-sc-lbl">WPM</div>
+        </div>
+        <div class="tc-stat-card">
+          <div class="tc-sc-val" id="tc-acc-val" style="color:var(--tc-accent2)">100%</div>
+          <div class="tc-sc-lbl">Accuracy</div>
+        </div>
+        <div class="tc-stat-card">
+          <div class="tc-sc-val" id="tc-timer-val" style="color:var(--tc-cursor);font-size:2.2rem">30</div>
+          <div class="tc-sc-lbl">Seconds</div>
+        </div>
+        <div class="tc-stat-card">
+          <div class="tc-sc-val" id="tc-err-val" style="color:var(--tc-incorrect)">0</div>
+          <div class="tc-sc-lbl">Errors</div>
+        </div>
+        <!-- Hidden but kept for JS compatibility -->
+        <span id="tc-raw-val" style="display:none">0</span>
+        <span id="tc-streak-val" style="display:none">0</span>
+      </div>
+
+      <!-- Progress bar -->
+      <div id="tc-progress-wrap"><div id="tc-progress-fill"></div></div>
+
+      <!-- Typing box -->
+      <div id="tc-type-container" onclick="tcFocusInp()">
+        <div id="tc-type-box">
+          <div id="tc-cursor-bar"></div>
+          <div id="tc-rail"></div>
+        </div>
+        <input id="tc-inp" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      </div>
+
+      <!-- Keyboard Heatmap -->
+      <div id="tc-heatmap-wrap">
+        <div class="tc-heatmap-header">
+          <div class="tc-heatmap-title">⌨ Real-Time Keyboard Heatmap</div>
+          <div class="tc-heatmap-hint">Keys light up as you type · Hover for details</div>
+        </div>
+        <div class="tc-kb-wrap"><div id="tc-kb-render"></div></div>
+        <div class="tc-hm-legend">
+          <span class="tc-hm-legend-label">Frequency:</span>
+          <div class="tc-hm-swatches">
+            <div class="tc-hm-swatch"><div class="tc-hm-dot" style="background:hsla(200,80%,28%,0.85)"></div>Low</div>
+            <div class="tc-hm-swatch"><div class="tc-hm-dot" style="background:hsla(160,85%,32%,0.9)"></div>Medium</div>
+            <div class="tc-hm-swatch"><div class="tc-hm-dot" style="background:hsla(120,85%,36%,0.9)"></div>High</div>
+            <div class="tc-hm-swatch"><div class="tc-hm-dot" style="background:hsla(60,95%,42%,0.9)"></div>Very High</div>
+            <div class="tc-hm-swatch"><div class="tc-hm-dot" style="background:hsla(0,90%,45%,0.95)"></div>Most Used</div>
+            <div class="tc-hm-swatch"><div class="tc-hm-dot" style="background:var(--tc-surface2);border:1px solid var(--tc-border)"></div>Untyped</div>
+          </div>
+        </div>
+        <div class="tc-hm-stats" id="tc-hm-stats"></div>
+        <div class="tc-hm-keys" id="tc-hm-key-badges"></div>
+      </div>
+
+      <!-- Bottom hints -->
+      <div id="tc-bottom-bar">
+        <span><kbd>Space</kbd> next word</span>
+        <span><kbd>Tab</kbd> restart</span>
+        <span><kbd>Esc</kbd> stop</span>
+      </div>
+
+    </div><!-- /typing-card -->
+  </section>
+
+  <!-- AD SLOT 1 — auto-hide if empty -->
+  <div class="ad-slot banner" id="ad-slot-1" aria-label="Advertisement"></div>
+
+  <!-- VIDEO CARD -->
+  <div class="card video-card" id="video">
+    <div class="card-header"><div class="dot"></div>Featured Tutorial</div>
+    <a class="video-thumb-link" href="https://www.youtube.com/watch?v=1ArVtCQqQRE" target="_blank" rel="noopener noreferrer" aria-label="Watch Ali Abdaal's 158 WPM typing guide on YouTube">
+      <img class="video-thumb-img" src="https://img.youtube.com/vi/1ArVtCQqQRE/maxresdefault.jpg" alt="Ali Abdaal — How I went from 20 to 158 WPM typing speed masterclass" onerror="this.src='https://img.youtube.com/vi/1ArVtCQqQRE/hqdefault.jpg'"/>
+      <div class="video-play-overlay">
+        <div class="play-btn">▶</div>
+        <div class="video-play-label">How to Type at 150+ WPM</div>
+        <div class="video-play-sublabel">Ali Abdaal · Watch on YouTube ↗</div>
+      </div>
+    </a>
+    <div class="credit-strip">
+      <div class="credit-avatar">AA</div>
+      <div class="credit-info">
+        <div class="credit-channel">Ali Abdaal</div>
+        <div class="credit-title">How I Went From 20 to 158 WPM — Typing speed masterclass</div>
+      </div>
+      <div class="credit-badge">★ Recommended</div>
+    </div>
+  </div>
+
+  <!-- TIPS CARD -->
+  <div class="card" id="tips">
+    <div class="card-header"><div class="dot"></div>Pro Typing Tips</div>
+    <div class="card-body">
+      <div class="tips-grid">
+        <div class="tip-card"><span class="tip-icon">👁️</span><div class="tip-label">Look Ahead</div><div class="tip-desc">Always read the <strong>next word</strong> while your fingers type the current one. This mental buffering eliminates hesitation pauses.</div></div>
+        <div class="tip-card"><span class="tip-icon">🎯</span><div class="tip-label">Accuracy First</div><div class="tip-desc">Precision over speed. At 50 WPM with 95% accuracy, you already outperform a 70 WPM typist making frequent mistakes.</div></div>
+        <div class="tip-card"><span class="tip-icon">🖐️</span><div class="tip-label">Home Row</div><div class="tip-desc">Anchor your fingers to ASDF and JKL; at all times. Muscle memory lives in the <strong>home row</strong> — never look down.</div></div>
+        <div class="tip-card"><span class="tip-icon">🔁</span><div class="tip-label">Daily Reps</div><div class="tip-desc">Deliberate 15-minute sessions beat marathon cramming. Consistency beats intensity — <strong>every single day</strong> matters.</div></div>
+        <div class="tip-card"><span class="tip-icon">🚀</span><div class="tip-label">150 WPM Goal</div><div class="tip-desc">Reaching <strong>150 WPM</strong> takes around 6–18 months of deliberate practice. Track weekly, celebrate milestones.</div></div>
+        <div class="tip-card"><span class="tip-icon">🧘</span><div class="tip-label">Relax Your Wrists</div><div class="tip-desc">Tension is the enemy of speed. Float your wrists lightly. Stiff hands cause errors and fatigue. Breathe, and let it flow.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-block">
+    <div class="quote-text">The secret to typing at 150 WPM is not moving faster — it's thinking smarter.</div>
+    <div class="quote-author">— Typing Philosophy · Stage 4</div>
+  </div>
+
+  <!-- WPM PROGRESSION CHART -->
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>WPM Progression Chart</div>
+    <div class="card-body">
+      <div class="wpm-section">
+        <div class="wpm-row" id="wpm-stage-0">
+          <div class="wpm-label-row"><div class="wpm-label-left"><span class="wpm-label">Stage 0 — Beginner</span><span class="wpm-stage-star" id="star-0">You are here</span></div><span class="wpm-value">0–25 WPM</span></div>
+          <div class="wpm-bar-track"><div class="wpm-bar-fill yellow" style="width:16%"></div></div>
+        </div>
+        <div class="wpm-row" id="wpm-stage-1">
+          <div class="wpm-label-row"><div class="wpm-label-left"><span class="wpm-label">Stage 1 — Getting There</span><span class="wpm-stage-star" id="star-1">You are here</span></div><span class="wpm-value">25–50 WPM</span></div>
+          <div class="wpm-bar-track"><div class="wpm-bar-fill yellow" style="width:33%"></div></div>
+        </div>
+        <div class="wpm-row" id="wpm-stage-2">
+          <div class="wpm-label-row"><div class="wpm-label-left"><span class="wpm-label">Stage 2 — Intermediate</span><span class="wpm-stage-star" id="star-2">You are here</span></div><span class="wpm-value">50–100 WPM</span></div>
+          <div class="wpm-bar-track"><div class="wpm-bar-fill accent" style="width:66%"></div></div>
+        </div>
+        <div class="wpm-row" id="wpm-stage-3">
+          <div class="wpm-label-row"><div class="wpm-label-left"><span class="wpm-label">Stage 3 — Advanced</span><span class="wpm-stage-star" id="star-3">You are here</span></div><span class="wpm-value">100–150 WPM</span></div>
+          <div class="wpm-bar-track"><div class="wpm-bar-fill goal" style="width:100%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT CARD -->
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>About TypeCore</div>
+    <div class="card-body">
+      <p class="body-text">TypeCore is a structured journey from zero to <strong>150 WPM</strong>. Whether you're a two-finger typist or someone already hovering around 60 WPM, there is a clear and deliberate path forward. The methodology is simple: <strong>look at the next word</strong>, anchor to home row, and practice with intent — not just with volume.</p>
+      <br/>
+      <p class="body-text">Across four distinct stages — 0, 50, 100, and 150 WPM — the guide breaks down exactly what habits to build and which bottlenecks to bust at each level. <strong>Typing speed</strong> is a superpower: faster thoughts become faster work, and faster work compounds into extraordinary results.</p>
+      <br/>
+      <p class="body-text">Use the <strong>Live Typing Test</strong> above to measure your current WPM and track your progress. Commit to the <strong>daily practice reps</strong>, trust the process, and watch your WPM climb week over week.</p>
+    </div>
+  </div>
+
+  <!-- AD SLOT 2 — auto-hide if empty -->
+  <div class="ad-slot banner" id="ad-slot-3" aria-label="Advertisement"></div>
+  <div class="ad-slot-spacer" id="ad-spacer-3"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="mailto:hello@typecore.app">Contact</a>
+      <a href="#terms">Terms</a>
+      <a href="#video">Credits</a>
+    </div>
+    <div class="footer-copy">Built with ⚡ passion · TypeCore · Mastery is a choice you make daily</div>
+  </footer>
+
+</div><!-- /wrapper -->
+
+<script>
+/* ═══════════════════════════════════════════════════
+   TYPECORE ENGINE
+═══════════════════════════════════════════════════ */
+
+// ── WORD POOLS ──────────────────────────────────────
+const TC_WORD_POOLS = {
+  words: [
+    "the quick brown fox jumps over the lazy dog practice makes perfect every expert was once a beginner",
+    "ability accept access across action actually after again against age ahead allow almost along already also always among amount apply around ask attempt attention avoid away back before being believe between both break bring build call care carry cause change check choice close come common consider continue control could cover create current deal decide deep describe develop direction discuss during each early enough enter even ever every example fall far feel figure find follow force form forward found full further give good great group hand happen hard help high hold hope house idea important include increase inside instead interest involve issue keep kind know large last later lead learn less light likely line list little long look main make many mean might mind move much need never next number often old once only open order other over part people place plan play point power present probably process provide public question quickly raise rather reach ready real reason recent relate return right run same seem sense short show side simply since situation small some soon space start state stay still stop study such support sure system take tell though thought through time toward together trade try turn under up upon usually value want water whether while whole will within without word work world would write yet young",
+    "focus on accuracy first and speed will naturally follow as your muscle memory builds over time every key press matters",
+    "consistent effort over time produces remarkable results beyond anything you can imagine today keep pushing forward",
+    "the keyboard is your instrument and every keystroke is a note in your digital symphony of thought",
+    "technology connects people across the globe and typing is the primary language of that connection between minds",
+    "learning to type without looking at the keyboard is a life skill that changes everything permanently",
+    "data flows through networks like water through rivers always finding the fastest path available online",
+    "code is poetry written in a language machines understand and humans can eventually learn to speak fluently",
+    "every word typed correctly builds genuine confidence and every mistake teaches something valuable about your fingers",
+    "speed and precision working in harmony create the kind of efficiency that multiplies your output dramatically",
+    "the mind is at its sharpest when the hands are moving and the goal ahead is clear and present always",
+    "start with the home row anchor your fingers and let muscle memory take over with enough practice daily",
+    "rhythm is the secret weapon of fast typists they move in a steady pulse never rushing never hesitating",
+    "mistakes are not failures they are data showing which keys need more deliberate attention in your practice",
+    "look ahead to the next word while your hands finish the current one this is the key mental shift needed",
+    "breathe deeply relax your shoulders and let your wrists float above the keyboard tension is speed enemy",
+    "a good typist reads the text like a musician reads sheet music anticipating the notes before they arrive",
+    "strong fingers come from repetition not force press each key gently and your speed will surprise you soon",
+    "the difference between fast and slow typists is rarely physical it is almost entirely mental and habitual",
+  ],
+  numbers: [
+    "1234 5678 9012 3456 7890 1234 5678 2024 2025 2026 100 200 300 400 500 600 700 800 900",
+    "3.14159 2.71828 1.41421 0.57721 1.61803 42 100 256 512 1024 2048 4096 8192 16384",
+    "192 168 1 1 255 255 255 0 10 0 0 1 127 0 0 1 8080 3000 5432 6379 27017",
+    "0 1 2 3 4 5 6 7 8 9 10 20 30 40 50 100 150 200 250 300 400 500 1000 2000 5000",
+  ],
+  symbols: [
+    "hello(world) {code: 'life'} => [1,2,3].map(x => x*2) const fn = () => true;",
+    "if(x > 0 && y < 100) { return x + y; } else { throw new Error('invalid'); }",
+    "SELECT * FROM users WHERE id = 42 AND status = 'active' ORDER BY created_at DESC;",
+    "npm install --save-dev @types/react eslint prettier webpack babel jest typescript",
+  ],
+  quotes: [
+    "the only way to do great work is to love what you do",
+    "in the middle of difficulty lies opportunity",
+    "it does not matter how slowly you go as long as you do not stop",
+    "success is not final failure is not fatal it is the courage to continue that counts",
+    "the future belongs to those who believe in the beauty of their dreams",
+    "do not wait to strike till the iron is hot but make it hot by striking",
+    "whether you think you can or think you cannot you are right either way",
+    "the secret of getting ahead is getting started one step at a time",
+    "life is ten percent what happens to you and ninety percent how you respond to it",
+    "you miss one hundred percent of the shots you do not take in life",
+    "strive not to be a success but rather to be of value to others always",
+    "the best time to plant a tree was twenty years ago the second best time is now",
+  ],
+};
+
+// ── STATE ────────────────────────────────────────
+const TC_STATE = {
+  words:[], wordEls:[], charEls:[],
+  wordIdx:0, charIdx:0,
+  history:[], charLog:[], keyMap:{}, errMap:{},
+  startTime:null, timerInterval:null,
+  testDuration:30, testMode:'words', testRunning:false, testDone:false,
+  customText:null, streak:0, maxStreak:0,
+  totalCorrect:0, totalErrors:0, rawKeystrokes:0,
+  wpmLog:[], cursorX:200, railOffset:0, targetRailOffset:0, rafScheduled:false,
+};
+
+// ── PROFILE ──────────────────────────────────────
+const TC_PROFILE = {name:'User',tests:0,bestWpm:0,totalWpm:0,streak:0,lastDate:null,xp:0,achievements:[]};
+const TC_RANKS = [
+  {name:'ROOKIE',xp:0},{name:'TYPIST',xp:200},{name:'FAST',xp:500},
+  {name:'SWIFT',xp:1000},{name:'ELITE',xp:2000},{name:'MASTER',xp:4000},
+  {name:'LEGEND',xp:8000},{name:'GOD',xp:15000},
+];
+function tcGetRank(xp){let r=TC_RANKS[0];for(const rank of TC_RANKS){if(xp>=rank.xp)r=rank;}return r;}
+function tcLoadProfile(){
+  try{const s=localStorage.getItem('tc2_profile');if(s) Object.assign(TC_PROFILE,JSON.parse(s));}catch(e){}
+  tcUpdateProfileUI();
+}
+function tcSaveProfile(){try{localStorage.setItem('tc2_profile',JSON.stringify(TC_PROFILE));}catch(e){}}
+
+// ── LEADERBOARD ──────────────────────────────────
+function tcGetLeaderboard(){try{return JSON.parse(localStorage.getItem('tc2_lb')||'[]');}catch(e){return[];}}
+function tcAddToLeaderboard(entry){
+  const lb=tcGetLeaderboard();lb.push(entry);lb.sort((a,b)=>b.wpm-a.wpm);
+  const top20=lb.slice(0,20);try{localStorage.setItem('tc2_lb',JSON.stringify(top20));}catch(e){}
+}
+
+// ── THEME ────────────────────────────────────────
+function tcSetTheme(id){
+  document.documentElement.dataset.theme=id;
+  try{localStorage.setItem('tc2_theme',id);}catch(e){}
+}
+
+// ── TEXT GENERATION ──────────────────────────────
+function tcGenerateText(){
+  if(TC_STATE.customText&&TC_STATE.testMode==='custom') return TC_STATE.customText.trim().split(/\s+/).slice(0,120);
+  const pool=TC_WORD_POOLS[TC_STATE.testMode]||TC_WORD_POOLS.words;
+  const base=pool[Math.floor(Math.random()*pool.length)];
+  let words=base.split(/\s+/);
+  while(words.length<100) words=[...words,...pool[Math.floor(Math.random()*pool.length)].split(/\s+/)];
+  if(TC_STATE.testMode==='words'||TC_STATE.testMode==='numbers'||TC_STATE.testMode==='symbols'){
+    for(let i=words.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[words[i],words[j]]=[words[j],words[i]];}
+  }
+  return words.slice(0,120);
+}
+
+// ── BUILD RAIL ───────────────────────────────────
+const tcRail=document.getElementById('tc-rail');
+function tcBuildRail(wordArr){
+  tcRail.innerHTML='';TC_STATE.wordEls=[];TC_STATE.charEls=[];
+  wordArr.forEach((word,wi)=>{
+    const wSpan=document.createElement('span');
+    wSpan.className='tc-w'+(wi===0?' active':'');
+    TC_STATE.charEls[wi]=[];
+    word.split('').forEach((ch,ci)=>{
+      const s=document.createElement('span');
+      s.className='tc-c'+(wi===0&&ci===0?' cur':'');
+      s.textContent=ch;wSpan.appendChild(s);TC_STATE.charEls[wi][ci]=s;
+    });
+    tcRail.appendChild(wSpan);TC_STATE.wordEls.push(wSpan);
+    if(wi<wordArr.length-1){
+      const sp=document.createElement('span');sp.style.cssText='display:inline-block;width:0.55em;';tcRail.appendChild(sp);
+    }
+  });
+}
+
+// ── CURSOR & RAIL ────────────────────────────────
+function tcGetCursorX(){const box=document.getElementById('tc-type-box');return Math.round(box.offsetWidth*0.25);}
+function tcScheduleRailUpdate(){
+  if(TC_STATE.rafScheduled) return;TC_STATE.rafScheduled=true;
+  requestAnimationFrame(tcUpdateRailPosition);
+}
+function tcUpdateRailPosition(){
+  TC_STATE.rafScheduled=false;
+  const wi=TC_STATE.wordIdx,ci=TC_STATE.charIdx;
+  if(!TC_STATE.wordEls[wi]) return;
+  const wEl=TC_STATE.wordEls[wi];
+  const chEl=TC_STATE.charEls[wi]?.[ci];
+  const charOff=chEl?chEl.offsetLeft:(TC_STATE.charEls[wi]?.length?TC_STATE.charEls[wi][TC_STATE.charEls[wi].length-1].offsetLeft+16:0);
+  TC_STATE.targetRailOffset=TC_STATE.cursorX-wEl.offsetLeft-charOff;
+  const diff=TC_STATE.targetRailOffset-TC_STATE.railOffset;
+  if(Math.abs(diff)<0.5){TC_STATE.railOffset=TC_STATE.targetRailOffset;}
+  else{TC_STATE.railOffset+=diff*0.25;tcScheduleRailUpdate();}
+  tcRail.style.transform=`translateY(-50%) translate3d(${TC_STATE.railOffset}px,0,0)`;
+}
+function tcSnapRail(){
+  const wi=TC_STATE.wordIdx,ci=TC_STATE.charIdx;
+  if(!TC_STATE.wordEls[wi]) return;
+  const wEl=TC_STATE.wordEls[wi];
+  const chEl=TC_STATE.charEls[wi]?.[ci];
+  const charOff=chEl?chEl.offsetLeft:0;
+  TC_STATE.railOffset=TC_STATE.cursorX-wEl.offsetLeft-charOff;
+  TC_STATE.targetRailOffset=TC_STATE.railOffset;
+  tcRail.style.transform=`translateY(-50%) translate3d(${TC_STATE.railOffset}px,0,0)`;
+}
+
+// ── CHAR MARKING ─────────────────────────────────
+function tcMarkChar(wi,ci,state){
+  const el=TC_STATE.charEls[wi]?.[ci];if(!el) return;
+  el.classList.remove('ok','err','cur');if(state) el.classList.add(state);
+}
+function tcSetCursorChar(){
+  TC_STATE.charEls[TC_STATE.wordIdx]?.forEach(s=>s.classList.remove('cur'));
+  const el=TC_STATE.charEls[TC_STATE.wordIdx]?.[TC_STATE.charIdx];
+  if(el) el.classList.add('cur');
+}
+
+// ── TIMER ────────────────────────────────────────
+function tcStartTimer(){TC_STATE.startTime=Date.now();TC_STATE.testRunning=true;TC_STATE.timerInterval=setInterval(tcTick,200);TC_STATE.wpmLog=[];}
+function tcTick(){
+  const elapsed=(Date.now()-TC_STATE.startTime)/1000;
+  if(TC_STATE.testDuration>0){
+    const left=Math.max(0,TC_STATE.testDuration-elapsed);
+    document.getElementById('tc-timer-val').textContent=Math.ceil(left);
+    document.getElementById('tc-progress-fill').style.width=Math.min((elapsed/TC_STATE.testDuration)*100,100)+'%';
+    if(left<=5) document.getElementById('tc-timer-val').style.color='var(--tc-accent2)';
+    if(left<=0){tcEndTest();return;}
+  } else {
+    document.getElementById('tc-timer-val').textContent=Math.floor(elapsed);
+    document.getElementById('tc-progress-fill').style.width=Math.min((TC_STATE.wordIdx/TC_STATE.words.length)*100,100)+'%';
+  }
+  tcUpdateLiveStats();tcLogWPM();
+}
+function tcLogWPM(){
+  const elapsed=(Date.now()-TC_STATE.startTime)/1000;if(elapsed<1) return;
+  TC_STATE.wpmLog.push({t:elapsed,wpm:tcCalcWPM()});
+}
+
+// ── STATS ────────────────────────────────────────
+function tcCalcWPM(){
+  if(!TC_STATE.startTime) return 0;
+  const sec=(Date.now()-TC_STATE.startTime)/1000;if(sec<2) return 0;
+  return Math.round((TC_STATE.charLog.filter(Boolean).length/5)/(sec/60));
+}
+function tcCalcRawWPM(){
+  if(!TC_STATE.startTime) return 0;
+  const sec=(Date.now()-TC_STATE.startTime)/1000;if(sec<2) return 0;
+  return Math.round((TC_STATE.rawKeystrokes/5)/(sec/60));
+}
+function tcCalcAcc(){
+  const tot=TC_STATE.charLog.length;if(!tot) return 100;
+  return Math.round((TC_STATE.charLog.filter(Boolean).length/tot)*100);
+}
+function tcUpdateLiveStats(){
+  document.getElementById('tc-wpm-val').textContent=tcCalcWPM();
+  document.getElementById('tc-acc-val').textContent=tcCalcAcc()+'%';
+  document.getElementById('tc-err-val').textContent=TC_STATE.totalErrors;
+}
+
+// ── GRAPHS ───────────────────────────────────────
+function tcDrawResultGraph(){
+  const canvas=document.getElementById('tc-result-graph');const ctx=canvas.getContext('2d');
+  const W=canvas.parentElement.offsetWidth-24;canvas.width=W;canvas.height=65;ctx.clearRect(0,0,W,65);
+  if(TC_STATE.wpmLog.length<2) return;
+  const maxWpm=Math.max(...TC_STATE.wpmLog.map(p=>p.wpm),1);
+  const pts=TC_STATE.wpmLog.map((p,i)=>({x:(i/(TC_STATE.wpmLog.length-1))*W,y:65-(p.wpm/maxWpm)*58}));
+  const accent=getComputedStyle(document.documentElement).getPropertyValue('--tc-accent').trim();
+  const grad=ctx.createLinearGradient(0,0,0,65);
+  grad.addColorStop(0,accent+'55');grad.addColorStop(1,accent+'00');
+  ctx.beginPath();ctx.moveTo(pts[0].x,65);pts.forEach(p=>ctx.lineTo(p.x,p.y));ctx.lineTo(pts[pts.length-1].x,65);ctx.closePath();
+  ctx.fillStyle=grad;ctx.fill();
+  ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);pts.forEach(p=>ctx.lineTo(p.x,p.y));
+  ctx.strokeStyle=accent;ctx.lineWidth=2.5;ctx.stroke();
+  pts.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,2.5,0,Math.PI*2);ctx.fillStyle=accent;ctx.fill();});
+}
+
+// ── END TEST ─────────────────────────────────────
+function tcEndTest(){
+  clearInterval(TC_STATE.timerInterval);
+  TC_STATE.testRunning=false;TC_STATE.testDone=true;
+  const elapsed=TC_STATE.startTime?(Date.now()-TC_STATE.startTime)/1000:0;
+  const wpm=tcCalcWPM(),acc=tcCalcAcc(),raw=tcCalcRawWPM();
+  document.getElementById('tc-r-wpm').textContent=wpm;
+  document.getElementById('tc-r-acc').textContent=acc+'%';
+  document.getElementById('tc-r-raw').textContent=raw;
+  document.getElementById('tc-r-time').textContent=Math.round(elapsed)+'s';
+  document.getElementById('tc-r-chars').textContent=TC_STATE.charLog.filter(Boolean).length;
+  TC_PROFILE.tests++;TC_PROFILE.totalWpm+=wpm;
+  if(wpm>TC_PROFILE.bestWpm) TC_PROFILE.bestWpm=wpm;
+  TC_PROFILE.xp+=Math.round(wpm*acc/100*2);
+  const today=new Date().toDateString();
+  const yesterday=new Date(Date.now()-86400000).toDateString();
+  if(TC_PROFILE.lastDate===today){}
+  else if(TC_PROFILE.lastDate===yesterday) TC_PROFILE.streak++;
+  else TC_PROFILE.streak=1;
+  TC_PROFILE.lastDate=today;
+  tcSaveProfile();tcUpdateProfileUI();tcCheckAchievements(wpm,acc);
+  tcUpdateWpmStar(wpm);
+  setTimeout(()=>{document.getElementById('tc-result-overlay').classList.add('show');setTimeout(tcDrawResultGraph,100);},300);
+}
+function tcSaveScore(){
+  const wpm=parseInt(document.getElementById('tc-r-wpm').textContent)||0;
+  const acc=parseInt(document.getElementById('tc-r-acc').textContent)||0;
+  tcAddToLeaderboard({name:TC_PROFILE.name,wpm,acc,date:new Date().toLocaleDateString()});
+  tcShowAchievement('💾','Saved!','Score added to leaderboard');
+}
+function tcCloseResult(){document.getElementById('tc-result-overlay').classList.remove('show');}
+
+// ── WPM STAGE STAR ───────────────────────────────
+function tcUpdateWpmStar(wpm){
+  ['star-0','star-1','star-2','star-3'].forEach(id=>document.getElementById(id).classList.remove('show'));
+  let stageId;
+  if(wpm<25) stageId='star-0';
+  else if(wpm<50) stageId='star-1';
+  else if(wpm<100) stageId='star-2';
+  else stageId='star-3';
+  const el=document.getElementById(stageId);
+  if(el){el.classList.add('show');el.textContent=`★ You are here (${wpm} WPM)`;}
+}
+
+// ── INIT / RESTART ───────────────────────────────
+function tcInitTest(){
+  clearInterval(TC_STATE.timerInterval);
+  TC_STATE.words=tcGenerateText();
+  TC_STATE.wordIdx=0;TC_STATE.charIdx=0;
+  TC_STATE.history=[];TC_STATE.charLog=[];
+  TC_STATE.keyMap={};TC_STATE.errMap={};
+  TC_STATE.startTime=null;TC_STATE.testRunning=false;TC_STATE.testDone=false;
+  TC_STATE.streak=0;TC_STATE.maxStreak=0;
+  TC_STATE.totalCorrect=0;TC_STATE.totalErrors=0;TC_STATE.rawKeystrokes=0;TC_STATE.wpmLog=[];
+  TC_STATE.railOffset=0;TC_STATE.targetRailOffset=0;
+  document.getElementById('tc-timer-val').style.color='var(--tc-cursor)';
+  document.getElementById('tc-timer-val').textContent=TC_STATE.testDuration===0?'∞':TC_STATE.testDuration;
+  document.getElementById('tc-wpm-val').textContent='0';
+  document.getElementById('tc-acc-val').textContent='100%';
+  document.getElementById('tc-err-val').textContent='0';
+  document.getElementById('tc-progress-fill').style.width='0%';
+  document.getElementById('tc-result-overlay').classList.remove('show');
+  tcInp.value='';
+  tcBuildRail(TC_STATE.words);
+  TC_STATE.cursorX=tcGetCursorX();
+  document.getElementById('tc-cursor-bar').style.left=TC_STATE.cursorX+'px';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{tcSnapRail();}));
+  tcFocusInp();
+  if(document.getElementById('tc-heatmap-wrap').classList.contains('show')) tcBuildHeatmap();
+}
+function tcRestartTest(){tcInitTest();}
+
+// ── INPUT ────────────────────────────────────────
+const tcInp=document.getElementById('tc-inp');
+function tcFocusInp(){tcInp.focus();}
+
+tcInp.addEventListener('input',()=>{
+  if(TC_STATE.testDone) return;
+  if(TC_STATE.startTime&&!TC_STATE.testRunning) return;
+  const val=tcInp.value;if(!val.length) return;
+  const typed=val[val.length-1];
+  if(!TC_STATE.startTime) tcStartTimer();
+  TC_STATE.rawKeystrokes++;
+  if(typed===' '){
+    tcInp.value='';
+    const wLen=TC_STATE.words[TC_STATE.wordIdx]?.length||0;
+    let hasErr=false;
+    for(let ci=TC_STATE.charIdx;ci<wLen;ci++){
+      tcMarkChar(TC_STATE.wordIdx,ci,'err');TC_STATE.charLog.push(false);TC_STATE.totalErrors++;hasErr=true;
+    }
+    const wEl=TC_STATE.wordEls[TC_STATE.wordIdx];
+    if(wEl){wEl.classList.remove('active');wEl.classList.add('done');if(hasErr) wEl.classList.add('error-word');}
+    TC_STATE.history.push({word:TC_STATE.words[TC_STATE.wordIdx],correct:!hasErr,time:Date.now()});
+    TC_STATE.wordIdx++;TC_STATE.charIdx=0;
+    if(TC_STATE.wordIdx>=TC_STATE.words.length){
+      if(TC_STATE.testDuration===0){const more=tcGenerateText();TC_STATE.words.push(...more);tcBuildRailAppend(more);}
+      else{tcEndTest();return;}
+    }
+    if(TC_STATE.wordEls[TC_STATE.wordIdx]) TC_STATE.wordEls[TC_STATE.wordIdx].classList.add('active');
+    tcSetCursorChar();tcScheduleRailUpdate();tcUpdateLiveStats();return;
+  }
+  const expected=TC_STATE.words[TC_STATE.wordIdx]?.[TC_STATE.charIdx];
+  if(expected===undefined){setTimeout(()=>tcInp.value='',0);return;}
+  const correct=typed===expected;
+  TC_STATE.charLog.push(correct);
+  if(correct){
+    TC_STATE.totalCorrect++;TC_STATE.streak++;
+    if(TC_STATE.streak>TC_STATE.maxStreak) TC_STATE.maxStreak=TC_STATE.streak;
+    tcMarkChar(TC_STATE.wordIdx,TC_STATE.charIdx,'ok');
+    if(TC_STATE.streak>0&&TC_STATE.streak%20===0) tcShowCombo(TC_STATE.streak);
+    const k=typed.toLowerCase();
+    TC_STATE.keyMap[k]=(TC_STATE.keyMap[k]||0)+1;
+    if(document.getElementById('tc-heatmap-wrap').classList.contains('show')) tcPulseKey(k,false);
+  } else {
+    TC_STATE.totalErrors++;TC_STATE.streak=0;
+    tcMarkChar(TC_STATE.wordIdx,TC_STATE.charIdx,'err');
+    const tc2=document.getElementById('tc-type-container');
+    tc2.style.borderColor='var(--tc-incorrect)55';
+    setTimeout(()=>tc2.style.borderColor='',200);
+    const k=expected.toLowerCase();
+    TC_STATE.errMap[k]=(TC_STATE.errMap[k]||0)+1;
+    if(document.getElementById('tc-heatmap-wrap').classList.contains('show')) tcPulseKey(k,true);
+  }
+  TC_STATE.charIdx++;
+  tcSetCursorChar();tcScheduleRailUpdate();tcUpdateLiveStats();
+  if(document.getElementById('tc-heatmap-wrap').classList.contains('show')) tcUpdateHeatmap();
+  setTimeout(()=>tcInp.value='',0);
+});
+
+function tcBuildRailAppend(newWords){
+  const before=TC_STATE.words.length-newWords.length;
+  newWords.forEach((word,i)=>{
+    const wi=before+i;
+    const sp=document.createElement('span');sp.style.cssText='display:inline-block;width:0.55em;';tcRail.appendChild(sp);
+    const wSpan=document.createElement('span');wSpan.className='tc-w';TC_STATE.charEls[wi]=[];
+    word.split('').forEach((ch,ci)=>{
+      const s=document.createElement('span');s.className='tc-c';s.textContent=ch;
+      wSpan.appendChild(s);TC_STATE.charEls[wi][ci]=s;
+    });
+    tcRail.appendChild(wSpan);TC_STATE.wordEls[wi]=wSpan;
+  });
+}
+
+tcInp.addEventListener('keydown',e=>{
+  if(e.key==='Tab'){e.preventDefault();tcRestartTest();return;}
+  if(e.key==='Escape'){clearInterval(TC_STATE.timerInterval);TC_STATE.testRunning=false;return;}
+  if(e.key==='Backspace'){
+    e.preventDefault();
+    if(TC_STATE.testDone||(TC_STATE.startTime&&!TC_STATE.testRunning)) return;
+    if(TC_STATE.charIdx>0){
+      TC_STATE.charIdx--;
+      const wasCorrect=TC_STATE.charLog.pop();
+      if(wasCorrect===false) TC_STATE.totalErrors--;
+      tcMarkChar(TC_STATE.wordIdx,TC_STATE.charIdx,'');
+      TC_STATE.charEls[TC_STATE.wordIdx][TC_STATE.charIdx].classList.remove('ok','err','cur');
+      tcSetCursorChar();tcScheduleRailUpdate();tcUpdateLiveStats();
+    }
+    setTimeout(()=>tcInp.value='',0);
+  }
+});
+
+// ── COMBO ─────────────────────────────────────────
+function tcShowCombo(n){
+  const el=document.getElementById('tc-combo-display');
+  el.textContent=`${n}× COMBO!`;el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');
+}
+
+// ── ACHIEVEMENTS ──────────────────────────────────
+const TC_ACHIEVEMENTS=[
+  {id:'first',icon:'🎯',title:'First Blood',desc:'Complete your first test',check:()=>TC_PROFILE.tests===1},
+  {id:'wpm50',icon:'⚡',title:'Speedster',desc:'Reach 50 WPM',check:(w)=>w>=50},
+  {id:'wpm100',icon:'🚀',title:'Century',desc:'Reach 100 WPM',check:(w)=>w>=100},
+  {id:'acc100',icon:'💎',title:'Perfectionist',desc:'100% accuracy',check:(_,a)=>a===100},
+  {id:'tests10',icon:'🔥',title:'Dedicated',desc:'Complete 10 tests',check:()=>TC_PROFILE.tests>=10},
+];
+function tcCheckAchievements(wpm,acc){
+  TC_ACHIEVEMENTS.forEach(a=>{
+    if(!TC_PROFILE.achievements.includes(a.id)&&a.check(wpm,acc)){
+      TC_PROFILE.achievements.push(a.id);tcSaveProfile();tcShowAchievement(a.icon,a.title,a.desc);
+    }
+  });
+}
+function tcShowAchievement(icon,title,desc){
+  const wrap=document.getElementById('tc-achievement-wrap');
+  const el=document.createElement('div');el.className='tc-achievement';
+  el.innerHTML=`<div class="tc-achievement-icon">${icon}</div><div><div class="tc-achievement-title">${title}</div><div class="tc-achievement-desc">${desc}</div></div>`;
+  el.onclick=()=>el.remove();wrap.appendChild(el);
+  setTimeout(()=>{if(el.parentNode) el.remove();},4000);
+}
+
+// ── PROFILE UI ────────────────────────────────────
+function tcUpdateProfileUI(){
+  const rank=tcGetRank(TC_PROFILE.xp);
+  const nextRank=TC_RANKS.find(r=>r.xp>TC_PROFILE.xp);
+  const xpPct=nextRank?Math.min(((TC_PROFILE.xp-rank.xp)/(nextRank.xp-rank.xp))*100,100):100;
+  const initial=(TC_PROFILE.name||'U')[0].toUpperCase();
+  document.getElementById('tc-avatar-chip').textContent=initial;
+  document.getElementById('tc-pp-avatar').textContent=initial;
+  document.getElementById('tc-chip-name').textContent=TC_PROFILE.name||'User';
+  document.getElementById('tc-chip-rank').textContent=rank.name;
+  document.getElementById('tc-pp-name-input').value=TC_PROFILE.name||'User';
+  document.getElementById('tc-xp-bar').style.width=xpPct+'%';
+  document.getElementById('tc-pp-rank-label').textContent=`${rank.name} · ${TC_PROFILE.xp} XP`;
+  const avg=TC_PROFILE.tests>0?Math.round(TC_PROFILE.totalWpm/TC_PROFILE.tests):0;
+  document.getElementById('tc-pp-stats').innerHTML=`
+    <div class="tc-pp-stat"><div class="tc-pp-stat-val">${TC_PROFILE.tests}</div><div class="tc-pp-stat-lbl">Tests</div></div>
+    <div class="tc-pp-stat"><div class="tc-pp-stat-val">${TC_PROFILE.bestWpm}</div><div class="tc-pp-stat-lbl">Best WPM</div></div>
+    <div class="tc-pp-stat"><div class="tc-pp-stat-val">${avg}</div><div class="tc-pp-stat-lbl">Avg WPM</div></div>
+    <div class="tc-pp-stat"><div class="tc-pp-stat-val">${TC_PROFILE.streak}</div><div class="tc-pp-stat-lbl">Streak</div></div>
+  `;
+  if(TC_PROFILE.bestWpm>0) tcUpdateWpmStar(TC_PROFILE.bestWpm);
+}
+document.getElementById('tc-pp-name-input').addEventListener('input',e=>{
+  TC_PROFILE.name=e.target.value;tcSaveProfile();tcUpdateProfileUI();
+});
+function tcToggleProfile(){document.getElementById('tc-profile-panel').classList.toggle('show');}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#tc-profile-panel')&&!e.target.closest('.tc-profile-btn'))
+    document.getElementById('tc-profile-panel').classList.remove('show');
+});
+
+// ── HEATMAP — Real-time, animated ─────────────────
+const TC_KB_ROWS = [
+  {keys:['`','1','2','3','4','5','6','7','8','9','0','-','='], cls:''},
+  {keys:['q','w','e','r','t','y','u','i','o','p','[',']','\\'], cls:'row-q'},
+  {keys:['a','s','d','f','g','h','j','k','l',';',"'"], cls:'row-a'},
+  {keys:['z','x','c','v','b','n','m',',','.','/'], cls:'row-z'},
+];
+
+function tcGetHeatLevel(hits){
+  if(hits===0) return 0;
+  if(hits<=2) return 1;
+  if(hits<=5) return 2;
+  if(hits<=10) return 3;
+  if(hits<=20) return 4;
+  if(hits<=40) return 5;
+  if(hits<=80) return 6;
+  return 7;
+}
+
+function tcBuildHeatmap(){
+  const container=document.getElementById('tc-kb-render');container.innerHTML='';
+  TC_KB_ROWS.forEach(({keys,cls})=>{
+    const rowEl=document.createElement('div');
+    rowEl.className='tc-kb-row'+(cls?' '+cls:'');
+    keys.forEach(k=>{
+      const el=document.createElement('div');el.className='tc-kb-key';
+      el.dataset.key=k;
+      const charDiv=document.createElement('div');charDiv.className='key-char';charDiv.textContent=k.toUpperCase();
+      const hitsDiv=document.createElement('div');hitsDiv.className='key-hits';hitsDiv.textContent='';
+      el.appendChild(charDiv);el.appendChild(hitsDiv);
+      rowEl.appendChild(el);
+    });
+    container.appendChild(rowEl);
+  });
+  tcRenderHeatmapColors();
+  tcRenderHeatmapStats();
+}
+
+function tcPulseKey(k, isError){
+  const el=document.querySelector(`.tc-kb-key[data-key="${k}"]`);
+  if(!el) return;
+  if(isError){
+    el.classList.remove('key-error');
+    void el.offsetWidth;
+    el.classList.add('key-error');
+    setTimeout(()=>el.classList.remove('key-error'),400);
+  } else {
+    el.classList.remove('key-press');
+    void el.offsetWidth;
+    el.classList.add('key-press');
+    setTimeout(()=>el.classList.remove('key-press'),300);
+  }
+  // Update heat immediately
+  const hits=(TC_STATE.keyMap[k]||0)+(TC_STATE.errMap[k]||0);
+  const level=tcGetHeatLevel(hits);
+  el.dataset.heat=level||'';
+  if(!level) delete el.dataset.heat;
+  const hitsEl=el.querySelector('.key-hits');
+  if(hitsEl) hitsEl.textContent=hits>0?hits:'';
+}
+
+function tcRenderHeatmapColors(){
+  // Find max hits for normalization
+  const allHits={};
+  Object.entries(TC_STATE.keyMap).forEach(([k,v])=>allHits[k]=(allHits[k]||0)+v);
+  Object.entries(TC_STATE.errMap).forEach(([k,v])=>allHits[k]=(allHits[k]||0)+v);
+
+  document.querySelectorAll('.tc-kb-key').forEach(el=>{
+    const k=el.dataset.key;if(!k) return;
+    const hits=allHits[k]||0;
+    const level=tcGetHeatLevel(hits);
+    if(level>0) el.dataset.heat=level;
+    else delete el.dataset.heat;
+    const hitsEl=el.querySelector('.key-hits');
+    if(hitsEl) hitsEl.textContent=hits>0?hits:'';
+    el.title=hits>0?`${k.toUpperCase()} — ${hits} presses`:`${k.toUpperCase()}: not typed`;
+  });
+}
+
+function tcRenderHeatmapStats(){
+  const allKeys=Object.keys({...TC_STATE.keyMap,...TC_STATE.errMap});
+  if(!allKeys.length){
+    document.getElementById('tc-hm-stats').innerHTML='<span style="font-family:\'JetBrains Mono\',monospace;font-size:0.6rem;color:var(--tc-dim);">Start typing to see your key stats...</span>';
+    document.getElementById('tc-hm-key-badges').innerHTML='';
+    return;
+  }
+  const totalHits=Object.values(TC_STATE.keyMap).reduce((a,b)=>a+b,0);
+  const totalErrs=Object.values(TC_STATE.errMap).reduce((a,b)=>a+b,0);
+  const overallAcc=totalHits+totalErrs>0?Math.round(totalHits/(totalHits+totalErrs)*100):100;
+  const mostHitKey=Object.entries({...TC_STATE.keyMap,...Object.fromEntries(Object.entries(TC_STATE.errMap))})
+    .reduce((acc,[k,v])=>{const t=(TC_STATE.keyMap[k]||0)+(TC_STATE.errMap[k]||0);return t>(acc[1]||0)?[k,t]:acc;},['',0]);
+  const worstKey=allKeys
+    .filter(k=>(TC_STATE.keyMap[k]||0)+(TC_STATE.errMap[k]||0)>=2)
+    .map(k=>{const h=TC_STATE.keyMap[k]||0,e=TC_STATE.errMap[k]||0;return{k,acc:h/(h+e)};})
+    .sort((a,b)=>a.acc-b.acc)[0];
+  const bestKey=allKeys
+    .filter(k=>(TC_STATE.keyMap[k]||0)+(TC_STATE.errMap[k]||0)>=2)
+    .map(k=>{const h=TC_STATE.keyMap[k]||0,e=TC_STATE.errMap[k]||0;return{k,acc:h/(h+e)};})
+    .sort((a,b)=>b.acc-a.acc)[0];
+  document.getElementById('tc-hm-stats').innerHTML=`
+    <div class="tc-hm-stat"><div class="tc-hm-stat-val">${totalHits+totalErrs}</div><div class="tc-hm-stat-lbl">Total Keys</div></div>
+    <div class="tc-hm-stat"><div class="tc-hm-stat-val">${overallAcc}%</div><div class="tc-hm-stat-lbl">Avg Accuracy</div></div>
+    <div class="tc-hm-stat"><div class="tc-hm-stat-val">${totalErrs}</div><div class="tc-hm-stat-lbl">Total Errors</div></div>
+    <div class="tc-hm-stat"><div class="tc-hm-stat-val">${allKeys.length}</div><div class="tc-hm-stat-lbl">Unique Keys</div></div>
+  `;
+  let badgesHtml='';
+  if(worstKey) badgesHtml+=`<div class="tc-hm-key-badge worst"><div class="badge-key">${worstKey.k.toUpperCase()}</div><div class="badge-info">Weakest key<br>${Math.round(worstKey.acc*100)}% accuracy</div></div>`;
+  if(bestKey) badgesHtml+=`<div class="tc-hm-key-badge best"><div class="badge-key">${bestKey.k.toUpperCase()}</div><div class="badge-info">Strongest key<br>${Math.round(bestKey.acc*100)}% accuracy</div></div>`;
+  if(mostHitKey[0]) badgesHtml+=`<div class="tc-hm-key-badge"><div class="badge-key" style="color:var(--tc-accent4)">${mostHitKey[0].toUpperCase()}</div><div class="badge-info">Most used<br>${mostHitKey[1]} presses</div></div>`;
+  document.getElementById('tc-hm-key-badges').innerHTML=badgesHtml;
+}
+function tcUpdateHeatmap(){tcRenderHeatmapColors();tcRenderHeatmapStats();}
+function tcToggleHeatmap(){
+  const hw=document.getElementById('tc-heatmap-wrap');hw.classList.toggle('show');
+  const btn=document.getElementById('tc-heatmap-toggle-btn');
+  if(hw.classList.contains('show')){btn.classList.add('active');tcBuildHeatmap();}
+  else{btn.classList.remove('active');}
+}
+
+// ── CUSTOM TEXT ───────────────────────────────────
+function tcOpenCustom(){document.getElementById('tc-custom-modal').classList.add('show');}
+function tcCloseCustom(){document.getElementById('tc-custom-modal').classList.remove('show');}
+function tcApplyCustom(){
+  const txt=document.getElementById('tc-custom-textarea').value.trim();
+  if(!txt){tcCloseCustom();return;}
+  TC_STATE.customText=txt;TC_STATE.testMode='custom';tcCloseCustom();tcRestartTest();
+}
+
+// ── MODE BUTTONS ──────────────────────────────────
+document.querySelectorAll('.tc-m-btn[data-tcmode]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const mode=btn.dataset.tcmode,val=btn.dataset.tcval;
+    document.querySelectorAll(`.tc-m-btn[data-tcmode="${mode}"]`).forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    if(mode==='time'){TC_STATE.testDuration=parseInt(val);document.getElementById('tc-timer-val').style.color='var(--tc-cursor)';}
+    if(mode==='type'&&val!=='custom'){TC_STATE.testMode=val;TC_STATE.customText=null;}
+    if(val!=='custom') tcRestartTest();
+  });
+});
+
+// ── EXPANDABLE SECTIONS ───────────────────────────
+function tcToggleSection(id){
+  const el=document.getElementById(id);
+  if(!el) return;
+  const isOpen=el.classList.contains('show');
+  document.querySelectorAll('.expand-section').forEach(s=>s.classList.remove('show'));
+  if(!isOpen){el.classList.add('show');setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'nearest'}),50);}
+}
+
+// ── WPM BAR ANIMATION ─────────────────────────────
+const bars=document.querySelectorAll('.wpm-bar-fill');
+const targets=[];
+bars.forEach(b=>{targets.push(b.style.width);b.style.width='0%';});
+const barObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      bars.forEach((b,i)=>{setTimeout(()=>{b.style.width=targets[i];},i*150);});
+      barObserver.disconnect();
+    }
+  });
+},{threshold:0.3});
+const barSection=document.querySelector('.wpm-section');
+if(barSection) barObserver.observe(barSection);
+
+// ── AD AUTO-HIDE ─────────────────────────────────
+function tcInitAds(){
+  document.querySelectorAll('.ad-slot').forEach(slot=>{
+    const hasContent=slot.children.length>0||slot.textContent.trim().length>0;
+    if(!hasContent){
+      slot.classList.add('hidden');
+      const spacer=document.getElementById(slot.id.replace('ad-slot','ad-spacer'));
+      if(spacer) spacer.style.display='none';
+    }
+  });
+}
+
+// ── BOOT ─────────────────────────────────────────
+window.addEventListener('load',()=>{
+  tcLoadProfile();
+  try{const t=localStorage.getItem('tc2_theme');if(t) tcSetTheme(t);}catch(e){}
+  tcInitTest();
+  tcInitAds();
+  if(TC_PROFILE.tests===0) tcShowAchievement('👋','Welcome to TypeCore!','Start typing to begin your journey');
+});
+window.addEventListener('resize',()=>{
+  TC_STATE.cursorX=tcGetCursorX();
+  document.getElementById('tc-cursor-bar').style.left=TC_STATE.cursorX+'px';
+  tcSnapRail();
+});
+</script>
+</body>
+</html>
